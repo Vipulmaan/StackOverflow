@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
-   resources :users do
-     resources :questions do
-     resources :answers , shallow: true
+
+  concern :commentable do
+    resources :comments
+  end
+
+  resources :users do
+    resources :questions, concerns: :commentable do
+      resources :answers, concerns: :commentable
      end
-     end
+    resources :answers, only: [:index, :edit, :destroy, :show, :update], concerns: :commentable
+    resources :comments, only: [:index, :edit, :destroy, :show, :update]
+  end
+
+
 end
+
