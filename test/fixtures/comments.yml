@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  commentable: one
+  commentable_type: Commentable
+  description: MyString
+
+two:
+  user: two
+  commentable: two
+  commentable_type: Commentable
+  description: MyString
