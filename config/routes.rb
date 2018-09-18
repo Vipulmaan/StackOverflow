@@ -1,3 +1,17 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  concern :commentable do
+    resources :comments
+  end
+
+  resources :users do
+    resources :questions, concerns: :commentable do
+      resources :answers, concerns: :commentable
+     end
+    resources :answers, only: [:index, :edit, :destroy, :show, :update], concerns: :commentable
+    resources :comments, only: [:index, :edit, :destroy, :show, :update]
+  end
+
+
 end
+
