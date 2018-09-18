@@ -60,3 +60,10 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 
+# Ignore IDE Configuration Files
+.idea
+.idea/workspace.xml
+
+# Ignore MAC .DS_Store Files
+.DS_Store
+
