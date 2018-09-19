@@ -1,0 +1,11 @@
+<% @answer_comments.each do |comment| %>
+  <p1>
+    <h4>
+      answer comments <br>
+      <%= comment.description %> </h4>
+    post by:  <%= User.find(comment.user_id).name %>
+
+
+  </p1>
+
+<% end %>

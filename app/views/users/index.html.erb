@@ -3,5 +3,6 @@
 <% @users.each do |user| %>
   <p>
     <%= link_to user.name, user_questions_path(user) %>   <br>
+
   </p>
 <% end %>

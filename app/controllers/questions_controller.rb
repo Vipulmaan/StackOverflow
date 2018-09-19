@@ -12,8 +12,13 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:user_id])
     @question = Question.find_by(id: params[:id])
-    @answers = Answer.where(question_id: params[:question_id])
+    @answers = Answer.where(question_id: params[:id])
+    @answer = Answer.new
+    @comments = @question.comments
+    @comment = @question.comments.new("user_id" => params[:user_id])
+
   end
 
   def create
