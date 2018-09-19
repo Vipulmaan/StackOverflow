@@ -58,6 +58,7 @@ yarn-debug.log*
 
 # Ignore uploaded files in development
 /storage/*
+<<<<<<< HEAD
 !/storage/.keep
 
 # Ignore IDE Configuration Files
@@ -67,3 +68,6 @@ yarn-debug.log*
 # Ignore MAC .DS_Store Files
 .DS_Store
 
+=======
+!/storage/.keep
+>>>>>>> 81ddcd1ece84a2269060d57e2bfbb288585251ae
