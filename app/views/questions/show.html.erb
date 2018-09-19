@@ -1,1 +1,10 @@
-<h1> show </h1>
+<div>
+  <%= @question.title %> <br>
+  <%= @question.body %>
+  <%= link_to "Edit", edit_user_question_path(@question.user_id, @question.id) %><br>
+  <%= link_to "delete", user_question_path(@question.user_id, @question.id), method: :delete, data: {confirm: "you sure?"} %>
+  <br>
+  Answers
+  <%= render 'answers/all_answers' %>
+
+</div>
