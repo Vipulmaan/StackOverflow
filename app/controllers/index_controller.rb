@@ -1,6 +1,7 @@
 class IndexController < ApplicationController
 
-def index
+  def Index
+    @users=User.all
+  end
 
-end
 end
