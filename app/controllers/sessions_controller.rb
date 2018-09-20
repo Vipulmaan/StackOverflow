@@ -14,11 +14,9 @@ class SessionsController < ApplicationController
       session[:user_id] = authorized_user.id
       flash[:notice] = "Wow Welcome again, you logged in as #{authorized_user.name}"
 
-<<<<<<< HEAD
+
       #debugger
-=======
-      debugger
->>>>>>> 279a21286d491740eedd3ea9abe97a228abe3fae
+
       redirect_to(:action => 'home')
     else
       flash[:notice] = "Invalid Username or Password"
