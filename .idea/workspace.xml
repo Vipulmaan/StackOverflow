@@ -1,62 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3d95774-df7b-4418-b315-a8988bf0a562" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/answers_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/answers_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/comments_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/comments_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/questions_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/questions_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/helpers/application_helper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/application_helper.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/helpers/users_helper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/users_helper.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/answers/_all_answers.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/answers/_all_answers.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/answers/_post_answers.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/answers/_post_answers.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/comments/_all_comments.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/comments/_all_comments.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/comments/_all_comments_for_answer.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/comments/_all_comments_for_answer.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/questions/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/questions/show.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/users/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/users/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.yml" afterDir="false" />
-    </list>
+    <list default="true" id="0fde0b63-bf4b-4e3a-bf13-ad0a96dc6878" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-276794203">
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="erb" value="2523" />
-          <entry key="rb" value="3852" />
-          <entry key="txt" value="196" />
-          <entry key="yml" value="13" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="PLAIN_TEXT" value="196" />
-          <entry key="RHTML" value="2523" />
-          <entry key="Ruby" value="3852" />
-          <entry key="YAML" value="13" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="erb" value="46" />
-          <entry key="rb" value="73" />
-          <entry key="yml" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="RHTML" value="46" />
-          <entry key="Ruby" value="73" />
-          <entry key="YAML" value="1" />
-        </counts>
-      </usages-collector>
-    </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
@@ -81,8 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/helpers/users_helper.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+            <state relative-caret-position="225">
+              <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -91,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/app/controllers/comments_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="307">
-              <caret line="30" column="15" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
+              <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -118,7 +67,7 @@
         <entry file="file://$PROJECT_DIR$/app/views/answers/_all_answers.html.erb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
             </state>
           </provider>
         </entry>
@@ -135,8 +84,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/comments/_all_comments_for_answer.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+            <state relative-caret-position="180">
+              <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -152,61 +101,11 @@
       </file>
     </leaf>
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/db/schema.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20180919002635_create_join_table_users_questions.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20180919002922_create_join_table.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20180919003300_create_join_table.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20180918070530_create_questions.rb" />
-        <option value="$PROJECT_DIR$/app/models/user.rb" />
-        <option value="$PROJECT_DIR$/app/models/question.rb" />
-        <option value="$PROJECT_DIR$/app/models/answer.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/users_controller.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20180919003817_create_user_favorite_questions.rb" />
-        <option value="$PROJECT_DIR$/app/views/questions/index.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/questions/new.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/questions/_form.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/questions/edit.html.erb" />
-        <option value="$PROJECT_DIR$/db/seeds.rb" />
-        <option value="$PROJECT_DIR$/app/views/comments/_post_comment.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/comments/_post_comment_for_answer.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/users/index.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/answers/_post_answers.html.erb" />
-        <option value="$PROJECT_DIR$/config/database.yml" />
-        <option value="$PROJECT_DIR$/app/controllers/answers_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/comments/_edit_comment_question.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/comments/_edit_comment_for_answer.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/answers/_edit_answers.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/comments_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-        <option value="$PROJECT_DIR$/app/helpers/application_helper.rb" />
-        <option value="$PROJECT_DIR$/app/views/questions/show.html.erb" />
-        <option value="$PROJECT_DIR$/app/helpers/users_helper.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/questions_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/answers/_all_answers.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/comments/_all_comments.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/comments/_all_comments_for_answer.html.erb" />
-      </list>
-    </option>
-  </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="797" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -376,119 +275,6 @@
       </pane>
     </panes>
   </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.gitignore</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Gemfile</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/config/database.yml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/db/schema.rb</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
-  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -501,7 +287,7 @@
       </list>
     </option>
   </component>
-  <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" />
+  <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -513,7 +299,7 @@
       <option name="presentableId" value="Default" />
       <updated>1537209750711</updated>
       <workItem from="1537209756144" duration="1837000" />
-      <workItem from="1537251986437" duration="78743000" />
+      <workItem from="1537251986437" duration="78999000" />
     </task>
     <task id="LOCAL-00001" summary="add user favorite questions table and add relationship in model">
       <created>1537331529352</created>
@@ -536,17 +322,23 @@
       <option name="project" value="LOCAL" />
       <updated>1537360474405</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ad  add delete question ,answer , comment functionality">
+      <created>1537419701148</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1537419701148</updated>
+    </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61267000" />
+    <option name="totallyTimeSpent" value="25000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2453505" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2453505" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Thumbnails" weight="0.5199035" />
@@ -560,7 +352,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49928468" weight="0.3293124" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49785408" visible="true" weight="0.26296744" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49785408" visible="true" weight="0.25814235" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50214595" side_tool="true" weight="0.44873342" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -589,32 +381,6 @@
       <window_info anchor="right" id="Database" order="3" />
     </layout-to-restore>
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -622,7 +388,8 @@
     <MESSAGE value="add user favorite questions table and add relationship in model" />
     <MESSAGE value="add user questions edit delete ask functionality" />
     <MESSAGE value="add comment functionality on answer and question" />
-    <option name="LAST_COMMIT_MESSAGE" value="add comment functionality on answer and question" />
+    <MESSAGE value="ad  add delete question ,answer , comment functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="ad  add delete question ,answer , comment functionality" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -864,15 +631,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/helpers/users_helper.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+        <state relative-caret-position="225">
+          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/comments_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="307">
-          <caret line="30" column="15" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -886,7 +653,7 @@
     <entry file="file://$PROJECT_DIR$/app/views/answers/_all_answers.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
     </entry>
@@ -899,8 +666,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/comments/_all_comments_for_answer.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+        <state relative-caret-position="180">
+          <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
         </state>
       </provider>
     </entry>
