@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
 
+
   protected
   def authenticate_user
     if session[:user_id]
@@ -20,4 +21,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
 end
+

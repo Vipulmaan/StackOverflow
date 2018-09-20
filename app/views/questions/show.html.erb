@@ -1,10 +1,18 @@
 <div>
-  <%= @question.title %> <br>
-  <%= @question.body %>
-  <%= link_to "Edit", edit_user_question_path(@question.user_id, @question.id) %><br>
+
+  <h2> <%= @question.title %> </h2> <br>
+
+  <h3> <%= @question.body %> </h3> <br><br>
+  <% if current_user == @user %>
+  <%= link_to "Edit", edit_user_question_path(@question.user_id, @question.id) %> &nbsp &nbsp
   <%= link_to "delete", user_question_path(@question.user_id, @question.id), method: :delete, data: {confirm: "you sure?"} %>
-  <br>
-  Answers
-  <%= render 'answers/all_answers' %>
+  <% end %>
+  <br><br>
+  <h3> comments </h3>
+  <%= render 'comments/all_comments' %>
+  <%= render 'comments/post_comment' %>
+  <h3>Answers</h3>
+  <%= render 'answers/all_answers' %><br>
+  <%= render 'answers/post_answers' %>
 
 </div>

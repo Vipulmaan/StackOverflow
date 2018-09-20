@@ -1,8 +1,16 @@
 <% @answers.each do |answer| %>
   <p1>
-    <br>
-    Answer Description <br>
-    <%= answer.description %><br>
+    <h4>
+
+      <%= answer.description %> </h4>
+    post by:  <%= User.find(answer.user_id).name %>
+    <% if answer.user_id == current_user %>
+      <%= link_to "edit", edit_user_question_answer_path(answer.user_id, answer.question_id, answer.id) %>
+      <%= link_to "delete", user_question_answer_path(answer.user_id, answer.question_id, answer.id), method: :delete, data: {confirm: "are you sure?"} %>
+    <% end %>
+    <%= render 'comments/all_comments_for_answer', :@answer_comments => answer.comments %>
+    <%= render 'comments/post_comment_for_answer', :@answer_comment_new => answer.comments.new("user_id" => answer.user_id), :@answer_comment => answer %>
+
 
   </p1>
 
