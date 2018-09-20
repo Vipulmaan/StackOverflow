@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
     @user = User.find(params[:user_id])
     @question = Question.find_by(id: params[:id])
     @answers = Answer.where(question_id: params[:id])
-    @answer = Answer.new(:user_id => @user.id, :question_id => @question.id)
+    @answer = Answer.new(:user_id => current_user.id, :question_id => @question.id)
     @comments = @question.comments
     @comment = @question.comments.new("user_id" => params[:user_id])
 
@@ -26,7 +26,7 @@ class QuestionsController < ApplicationController
   def create
 
     @question = Question.new(question_params)
-    @question.user_id = params[:user_id]
+    @question.user_id = current_user.id
     if @question.save
       redirect_to user_question_path(@question.user_id, @question.id)
     else
