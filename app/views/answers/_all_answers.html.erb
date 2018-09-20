@@ -4,7 +4,7 @@
 
       <%= answer.description %> </h4>
     post by:  <%= User.find(answer.user_id).name %>
-    <% if answer.user_id == current_user %>
+    <% if answer.user_id == current_user.id %>
       <%= link_to "edit", edit_user_question_answer_path(answer.user_id, answer.question_id, answer.id) %>
       <%= link_to "delete", user_question_answer_path(answer.user_id, answer.question_id, answer.id), method: :delete, data: {confirm: "are you sure?"} %>
     <% end %>
