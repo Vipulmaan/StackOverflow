@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
 
-  #before_action :valid_user_for_update? , :only => :edit
+  before_action :authorize_user, only: [:edit, :update, :destroy]
+
 
   def new
     @question = Question.new(user_id: params[:user_id])
@@ -12,10 +13,11 @@ class QuestionsController < ApplicationController
   end
 
   def show
+
     @user = User.find(params[:user_id])
     @question = Question.find_by(id: params[:id])
     @answers = Answer.where(question_id: params[:id])
-    @answer = Answer.new
+    @answer = Answer.new(:user_id => @user.id, :question_id => @question.id)
     @comments = @question.comments
     @comment = @question.comments.new("user_id" => params[:user_id])
 
@@ -53,22 +55,20 @@ class QuestionsController < ApplicationController
 
   private
 
-  def current_user
-    User.find_by(id: params[:user_id])
+  def authorize_user
+    @question = Question.find(params[:id])
+    @user = User.find(@question.user_id)
+    flash.now[:danger] = "You do not have authorization to edit this post"
+    unless isadmin?(@user)
+      redirect_to user_question_path(@question.user_id, @question.id)
+    end
+
   end
 
   def question_params
     params.require(:question).permit(:title, :body)
   end
 
-  def valid_user_for_update?
-    @question = Question.find(params[:id])
-    if @question.user_id == params[:user_id]
-      return true
-    else
-      return false
-    end
-  end
 
 end
 
