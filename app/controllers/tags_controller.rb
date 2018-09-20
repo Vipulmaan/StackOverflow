@@ -20,7 +20,7 @@ class TagsController < ApplicationController
   def edit
     @tag = Tag.find_by(id: params[:id])
     @user = User.find(params[:user_id])
-   # @for_edit=params[:tag_id]
+
 
   end
 
