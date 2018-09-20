@@ -25,11 +25,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-<<<<<<< HEAD
+
 gem 'bcrypt-ruby', :require => 'bcrypt'
-=======
-gem 'bcrypt', '~> 3.1.7'
->>>>>>> 279a21286d491740eedd3ea9abe97a228abe3fae
+
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
