@@ -1,4 +1,10 @@
-<%= link_to "Logout", '/logout'%>
+<%= link_to "Logout", '/logout' %>  &nbsp
+&nbsp
+
+<%= link_to "Ask Question", new_user_question_path(current_user.id) %>  &nbsp
+&nbsp
+<%= link_to "profile", user_profile_index_path(current_user.id) %>  &nbsp
+&nbsp
 
 <h1>All Questions</h1>
 
@@ -7,3 +13,5 @@
     <%= link_to question.title,  user_question_path(question.user_id,question.id) %>   <br>
   </p>
 <% end %>
+
+
