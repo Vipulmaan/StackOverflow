@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_19_003817) do
+ActiveRecord::Schema.define(version: 2018_09_21_015455) do
 
-  create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "description"
     t.bigint "question_id"
     t.datetime "created_at", null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2018_09_19_003817) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.string "body"
     t.datetime "created_at", null: false
@@ -73,10 +73,23 @@ ActiveRecord::Schema.define(version: 2018_09_19_003817) do
     t.index ["email"], name: "index_users_on_email"
   end
 
+  create_table "votes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "votable_type"
+    t.bigint "votable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "vote"
+    t.index ["user_id", "votable_id"], name: "index_votes_on_user_id_and_votable_id", unique: true
+    t.index ["user_id"], name: "index_votes_on_user_id"
+    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id"
+  end
+
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "questions", "users"
   add_foreign_key "user_favorite_questions", "questions"
   add_foreign_key "user_favorite_questions", "users"
+  add_foreign_key "votes", "users"
 end

@@ -26,12 +26,18 @@ Rails.application.routes.draw do
     resources :tags
   end
 
+  concern :votable do
+    resources :votes
+  end
+
   resources :users do
     resources :tags , concerns: :taggable
     resources :questions, concerns: :commentable do
+      resources :votes, concerns: :votable
       resources :answers, concerns: :commentable
       resources :tags ,concerns: :taggable
-     end
+    end
+
     resources :answers, only: [:index, :edit, :destroy, :show, :update], concerns: :commentable
     resources :comments, only: [:index, :edit, :destroy, :show, :update]
   end

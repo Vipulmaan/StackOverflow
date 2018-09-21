@@ -16,10 +16,12 @@ class QuestionsController < ApplicationController
 
     @user = User.find(params[:user_id])
     @question = Question.find_by(id: params[:id])
-    @answers = Answer.where(question_id: params[:id])
+    @answers = @question.answers
     @answer = Answer.new(:user_id => current_user.id, :question_id => @question.id)
     @comments = @question.comments
     @comment = @question.comments.new("user_id" => params[:user_id])
+    @tags = @question.tags
+    @tag = Tag.new
 
   end
 
