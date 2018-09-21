@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   end
 
   resources :users do
+    resources :profile
     resources :tags , concerns: :taggable
     resources :questions, concerns: :commentable do
       resources :answers, concerns: :commentable
