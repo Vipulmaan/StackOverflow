@@ -1,12 +1,13 @@
 <% @answer_comments.each do |comment| %>
   <p1>
-    <h4>
-      answer comments <br>
-      <%= comment.description %> </h4>
+    <br>
+    <h4> comments <br><br></h4>
+
+    <%= comment.description %>
     post by:  <%= User.find(comment.user_id).name %>
     <% if comment.user_id == current_user.id %>
-      <%= link_to "edit", edit_user_question_answer_comment_path(comment.user_id, Answer.find(comment.commentable_id).question_id, comment.commentable_id, comment.id) %>
-      <%= link_to "delete", user_question_answer_comment_path(comment.user_id, Answer.find(comment.commentable_id).question_id, comment.commentable_id, comment.id), method: :delete, data: {confirm: "are you sure?"} %>
+      <%= link_to "edit", edit_user_question_answer_comment_path(@question.user_id, @question.id, comment.commentable_id, comment.id) %>
+      <%= link_to "delete", user_question_answer_comment_path(@question.user_id, @question.id, comment.commentable_id, comment.id), method: :delete, data: {confirm: "are you sure?"} %>
     <% end %>
   </p1>
 

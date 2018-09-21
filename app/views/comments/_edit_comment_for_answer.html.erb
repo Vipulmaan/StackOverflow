@@ -1,5 +1,5 @@
 <br>
-<%= form_for(@comment, url: user_question_answer_comment_path(@comment.user_id, Answer.find(@comment.commentable_id).question_id, @comment.commentable_id, @comment.id)) do |f| %>
+<%= form_for(@comment, url: user_question_answer_comment_path(@user.id, @answer.question_id, @answer.id, @comment.id)) do |f| %>
 
   <%= f.label :comment %>
   <%= f.text_field :description, class: 'form-control' %>
