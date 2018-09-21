@@ -6,11 +6,11 @@ class VotesController < ApplicationController
     @parent = parent
 
     if (params[:upvote])
-      Vote.upvote(current_user, @parent.id, params[:votable_type])
+      Vote.upvote(current_user, @parent.id, params[:type])
     elsif (params[:downvote])
-      Vote.downvote(current_user, @parent.id, params[:votable_type])
+      Vote.downvote(current_user, @parent.id, params[:type])
     end
-    debugger
+
   end
 
 

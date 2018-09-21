@@ -4,6 +4,10 @@
 
       <%= answer.description %> </h4>
     post by:  <%= User.find(answer.user_id).name %>
+    <%= link_to "upvote", user_question_answer_votes_path(@user.id, @question.id, answer.id, :upvote => "upvote", :type => "Answer"), method: :post %>
+    &nbsp
+    &nbsp
+    <%= link_to "downvote", user_question_answer_votes_path(@user.id, @question.id, answer.id, :downvote => "downvote", :type => "Answer"), method: :post %>
     <% if answer.user_id == current_user.id %>
       <%= link_to "edit", edit_user_question_answer_path(@user.id, answer.question_id, answer.id) %>
       <%= link_to "delete", user_question_answer_path(@user.id, answer.question_id, answer.id), method: :delete, data: {confirm: "are you sure?"} %>

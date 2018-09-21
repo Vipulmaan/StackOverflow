@@ -2,14 +2,13 @@ class Vote < ApplicationRecord
   belongs_to :user
   belongs_to :votable, polymorphic: true
   validates :user_id, uniqueness: {scope: :votable_id}
-#  validates :vote, inclusion: {in: [1, -1]}
+  validates :vote, inclusion: {in: [1, -1, nil]}
 
 
   def self.upvote(user, id, type)
     if !user_exist?(user, id)
-      cast_vote(type, user, id, 1)
+      cast_vote(user, id, 1, type)
     else
-      puts "work"
       vote = find_value(user, id)
       puts vote.inspect
       value = vote.vote
@@ -21,7 +20,8 @@ class Vote < ApplicationRecord
 
   def self.downvote(user, id, type)
     if !user_exist?(user, id)
-      cast_vote(type, user, id, -1)
+      cast_vote(user, id, -1, type)
+
     else
       vote = find_value(user, id)
       value = vote.vote
@@ -37,7 +37,7 @@ class Vote < ApplicationRecord
   private
 
   def self.user_exist?(user, id)
-    if Vote.exists?(user_id: user.id) && Vote.exists?(votable_id: id)
+    if Vote.exists?(user_id: user.id, votable_id: id)
       puts "exist"
       return true
     else
@@ -46,8 +46,10 @@ class Vote < ApplicationRecord
     end
   end
 
-  def self.cast_vote(type, user, id, vote)
-    Vote.create(user_id: user.id, votable_id: id, vote: vote, votable_type: type)
+  def self.cast_vote(user, id, vote, type)
+    @vote = Vote.new(user_id: user.id, votable_id: id, vote: vote, votable_type: type)
+    @vote.save
+    puts @vote.inspect
   end
 
   def self.update_vote(v, user, id, vote)
