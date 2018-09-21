@@ -1,3 +1,4 @@
+
 <div>
 
   <h2> <%= @question.title %> </h2> <br>
@@ -8,8 +9,10 @@
   &nbsp
   <%= link_to "downvote", user_question_votes_path(@user.id, @question.id, :downvote => "downvote", :type => "Question"), method: :post %>
   <% if current_user == @user %>
-  <%= link_to "Edit", edit_user_question_path(@question.user_id, @question.id) %> &nbsp &nbsp
-  <%= link_to "delete", user_question_path(@question.user_id, @question.id), method: :delete, data: {confirm: "you sure?"} %>
+    &nbsp
+    &nbsp &nbsp
+    &nbsp <%= link_to "Edit", edit_user_question_path(@question.user_id, @question.id) %> &nbsp &nbsp
+    <%= link_to "delete", user_question_path(@question.user_id, @question.id), method: :delete, data: {confirm: "you sure?"} %>
     <%= render "tags/tag_for_question" %>
   <% end %>
   <br><br>
@@ -23,6 +26,5 @@
   <h3> tags </h3>
   <%= render 'tags/all_question_tags' %>
 
-
-
 </div>
+

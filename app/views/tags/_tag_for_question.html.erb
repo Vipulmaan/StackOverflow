@@ -2,7 +2,6 @@
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(@tag, url: user_question_tags_path(current_user.id, @question.id)) do |f| %>
 
-      <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
       <%= f.submit "add tag", class: "btn btn-primary" %>
     <% end %>
