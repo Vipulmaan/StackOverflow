@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root 'index#index'
   post'/loginattempt' , to:  "sessions#login_attempt"
   get "/logout", to: "sessions#logout"
-
+  get "/favorite", to: "favorite_questions#create"
 
   root to:  "sessions#login"
   get  "/signup", to: "users#new"

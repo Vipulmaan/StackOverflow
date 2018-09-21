@@ -4,10 +4,13 @@
   <h2> <%= @question.title %> </h2> <br>
 
   <h3> <%= @question.body %> </h3> <br><br>
+
+  <%= link_to "favorite", {controller:'favorite_questions',action:'create', question_id:@question.id }%>
   <%= link_to "upvote", user_question_votes_path(@user.id, @question.id, :upvote => "upvote", :type => "Question"), method: :post %>
   &nbsp
   &nbsp
   <%= link_to "downvote", user_question_votes_path(@user.id, @question.id, :downvote => "downvote", :type => "Question"), method: :post %>
+
   <% if current_user == @user %>
     &nbsp
     &nbsp &nbsp
