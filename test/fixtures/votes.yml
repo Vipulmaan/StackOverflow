@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  upvote: false
+  downvote: false
+  votable: one
+  votable_type: Votable
+
+two:
+  user: two
+  upvote: false
+  downvote: false
+  votable: two
+  votable_type: Votable

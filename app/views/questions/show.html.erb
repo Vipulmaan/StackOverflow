@@ -1,12 +1,22 @@
+
 <div>
 
   <h2> <%= @question.title %> </h2> <br>
 
   <h3> <%= @question.body %> </h3> <br><br>
+
   <%= link_to "favorite", {controller:'favorite_questions',action:'create', question_id:@question.id }%>
+  <%= link_to "upvote", user_question_votes_path(@user.id, @question.id, :upvote => "upvote", :type => "Question"), method: :post %>
+  &nbsp
+  &nbsp
+  <%= link_to "downvote", user_question_votes_path(@user.id, @question.id, :downvote => "downvote", :type => "Question"), method: :post %>
+
   <% if current_user == @user %>
-  <%= link_to "Edit", edit_user_question_path(@question.user_id, @question.id) %> &nbsp &nbsp
-  <%= link_to "delete", user_question_path(@question.user_id, @question.id), method: :delete, data: {confirm: "you sure?"} %>
+    &nbsp
+    &nbsp &nbsp
+    &nbsp <%= link_to "Edit", edit_user_question_path(@question.user_id, @question.id) %> &nbsp &nbsp
+    <%= link_to "delete", user_question_path(@question.user_id, @question.id), method: :delete, data: {confirm: "you sure?"} %>
+    <%= render "tags/tag_for_question" %>
   <% end %>
   <br><br>
   <h3> comments </h3>
@@ -15,5 +25,9 @@
   <h3>Answers</h3>
   <%= render 'answers/all_answers' %><br>
   <%= render 'answers/post_answers' %>
+  <br>
+  <h3> tags </h3>
+  <%= render 'tags/all_question_tags' %>
 
 </div>
+

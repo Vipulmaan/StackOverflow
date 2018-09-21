@@ -1,4 +1,4 @@
-<h1>User Tags </h1>
+<h1><%= current_user.name %> </h1>
 
 <% @tags.each do |tag| %>
   <p>
@@ -9,4 +9,4 @@
   <%= link_to "edit",  edit_user_tag_path(tag.taggable_id,tag.id) %>
     <%end %>
 <% end %>
-<%= link_to "add tag" ,  new_user_tag_path(current_user.id) %>
+<%= link_to "add tag", new_user_tag_path(current_user.id) %>

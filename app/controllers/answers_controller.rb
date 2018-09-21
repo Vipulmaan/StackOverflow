@@ -8,11 +8,12 @@ class AnswersController < ApplicationController
     @answer = @question.answers.new(answer_params)
     @answer.user_id = current_user.id
     @answer.save
-    redirect_to user_question_path(@user.id, @question.id)
+    redirect_to user_question_path(@question.user_id, @question.id)
   end
 
   def edit
     @answer = Answer.find_by(id: params[:id])
+    @question = Question.find_by(id: params[:question_id])
     @user = User.find(params[:user_id])
     render :partial => "answers/edit_answers"
   end
@@ -20,9 +21,9 @@ class AnswersController < ApplicationController
   def update
     @answer = Answer.find(params[:id])
     if @answer.update_attributes(answer_params)
-      redirect_to user_question_path(@answer.user_id, @answer.question_id)
+      redirect_to user_question_path(params[:user_id], @answer.question_id)
     else
-      render 'edit'
+      render :partial => "answers/edit_answers"
     end
 
   end

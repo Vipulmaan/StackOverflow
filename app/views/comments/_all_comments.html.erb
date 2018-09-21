@@ -6,8 +6,8 @@
     post by:  <%= User.find(comment.user_id).name %>
     <% if comment.user_id == current_user.id %>
       <% unless comment.id.nil? %>
-        <%= link_to "edit", edit_user_question_comment_path(comment.user_id, comment.commentable_id, comment.id) %>
-        <%= link_to "delete", user_question_comment_path(comment.user_id, comment.commentable_id, comment.id), method: :delete, data: {confirm: "are you sure?"} %>
+        <%= link_to "edit", edit_user_question_comment_path(@user.id, comment.commentable_id, comment.id) %>
+        <%= link_to "delete", user_question_comment_path(@user.id, comment.commentable_id, comment.id), method: :delete, data: {confirm: "are you sure?"} %>
       <% end %>
     <% end %>
   </p1>
