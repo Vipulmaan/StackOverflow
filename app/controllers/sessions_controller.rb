@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   end
 
   def login_attempt
-    authorized_user = User.authenticate(params[:username_or_email],params[:login_password])
+    authorized_user = User.authenticate(params[:username_or_email], params[:login_password])
     #debugger
     if authorized_user
       session[:user_id] = authorized_user.id

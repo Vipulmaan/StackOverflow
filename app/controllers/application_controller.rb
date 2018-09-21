@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
 
 
-
   def authenticate_user
     if session[:user_id]
       # set current user object to @current_user object variable
@@ -12,6 +11,7 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
+
   def save_login_state
     if session[:user_id]
       redirect_to(:controller => 'sessions', :action => 'home')

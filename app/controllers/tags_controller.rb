@@ -5,7 +5,7 @@ class TagsController < ApplicationController
   end
 
   def new
-    @tag=Tag.new
+    @tag = Tag.new
   end
 
   def create
@@ -38,6 +38,7 @@ class TagsController < ApplicationController
   end
 
   private
+
   def tag_params
     params.require(:tag).permit(:name)
   end
@@ -52,9 +53,9 @@ class TagsController < ApplicationController
 
   def find_route
     unless params[:question_id]
-       redirect_to user_tags_path(params[:user_id])
+      redirect_to user_tags_path(params[:user_id])
     else
       redirect_to user_question_path(current_user.id, params[:question_id])
     end
-end
+  end
 end

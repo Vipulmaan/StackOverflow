@@ -18,6 +18,22 @@ class Vote < ApplicationRecord
     end
   end
 
+  def self.is_upvote?(user, id, type)
+    if upvote(user, id, type)
+      return true
+    else
+      return false
+    end
+  end
+
+  def self.is_downvote?(user, id, type)
+    if downvote(user, id, type)
+      return true
+    else
+      return false
+    end
+  end
+
   def self.downvote(user, id, type)
     if !user_exist?(user, id)
       cast_vote(user, id, -1, type)

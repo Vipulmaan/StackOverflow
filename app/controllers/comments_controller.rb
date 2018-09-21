@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
     @comment = @parent.comments.new(comment_params)
     @comment.save
     find_route
-    end
+  end
 
   def update
     @parent = parent

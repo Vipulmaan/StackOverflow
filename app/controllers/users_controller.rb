@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   after_action :clear_password
 
   private
+
   def encrypt_password
     #debugger
     if params[:user][:password].present?
@@ -21,6 +22,7 @@ class UsersController < ApplicationController
   end
 
   public
+
   def new
     @user = User.new
   end
@@ -31,11 +33,11 @@ class UsersController < ApplicationController
 
 
   def show
-    @user=User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def create
-   # render plain:  params[:user]
+    # render plain:  params[:user]
     @user = User.new(user_params)
     @user.salt = self.salts
     @user.encrypted_password = self.encrypted_passwords
@@ -52,18 +54,18 @@ class UsersController < ApplicationController
   end
 
 
-def user_params
-  if params[:password]==params[:password_confirmation]
+  def user_params
+    if params[:password] == params[:password_confirmation]
 
-    params.require(:user).permit(:name, :email)
+      params.require(:user).permit(:name, :email)
+
+    end
+  end
+
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = 'User successfully deleted!'
+    redirect_to (users_url)
 
   end
-end
-
-def destroy
-  User.find( params[:id] ).destroy
-  flash[:success] = 'User successfully deleted!'
-  redirect_to (users_url)
-
-end
 end
