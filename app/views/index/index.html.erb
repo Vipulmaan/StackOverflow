@@ -1,7 +1,9 @@
 <h1>Welcome to Stack Overflow!</h1>
-
+<% if current_user.nil? %>
 <%= link_to "Sign-up", new_user_path %>
 <%= link_to "Login", '/loginattempt', method: :post %>
+<% end %>
+<%#debugger %>
 
-<h1>All users</h1>
+
 

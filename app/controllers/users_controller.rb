@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @questions = Question.all
   end
 
 
@@ -56,6 +56,7 @@ def user_params
   if params[:password]==params[:password_confirmation]
 
     params.require(:user).permit(:name, :email)
+
   end
 end
 

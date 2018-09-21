@@ -3,6 +3,7 @@
 <% @questions.each do |question| %>
   <p>
     <%= link_to question.title, user_question_path(question.user_id, question.id) %>   <br>
+
   </p>
 <% end %>
 

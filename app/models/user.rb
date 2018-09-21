@@ -10,6 +10,7 @@ class User < ApplicationRecord
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\Z/i
   validates :name, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
   validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
+  
 
   def self.authenticate(username_or_email="", login_password="")
     if  EMAIL_REGEX.match(username_or_email)
