@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_21_103542) do
+ActiveRecord::Schema.define(version: 2018_09_24_062722) do
 
-
-  create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "description"
     t.bigint "question_id"
     t.datetime "created_at", null: false
@@ -60,6 +59,7 @@ ActiveRecord::Schema.define(version: 2018_09_21_103542) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_user_favorite_questions_on_question_id"
+    t.index ["user_id", "question_id"], name: "index_user_favorite_questions_on_user_id_and_question_id", unique: true
     t.index ["user_id"], name: "index_user_favorite_questions_on_user_id"
   end
 
