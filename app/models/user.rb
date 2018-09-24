@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :tags, as: :taggable, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorite_questions, class_name: "UserFavoriteQuestion", dependent: :destroy
+  has_many :votes, dependent: :destroy
 
   attr_accessor :password
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\Z/i
@@ -24,6 +25,8 @@ class User < ApplicationRecord
       return false
     end
   end
+
+
   def match_password(login_password="")
     encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
   end

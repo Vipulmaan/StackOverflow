@@ -14,3 +14,11 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+$(document).on('ajax:success', '.your-form', function (e, data) {
+    if (data.status == 'success') {
+        showSuccessFlash(data);
+    } else {
+        showErrorFlash(data);
+    }
+});

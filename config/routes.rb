@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
 
 
-
   get 'sessions/login'
   get 'sessions/home'
   get 'sessions/profile'
-  root 'index#index'
+  root 'sessions#index'
   post'/loginattempt' , to:  "sessions#login_attempt"
   get "/logout", to: "sessions#logout"
   get "/favorite", to: "favorite_questions#create"
+  get "/all_users", to: "users#all_users"
 
   root to:  "sessions#login"
   get  "/signup", to: "users#new"

@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-
-
+  include ApplicationHelper
 
   def authenticate_user
     if session[:user_id]
@@ -12,6 +11,7 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
+
   def save_login_state
     if session[:user_id]
       redirect_to(:controller => 'sessions', :action => 'home')
@@ -32,10 +32,6 @@ class ApplicationController < ActionController::Base
   end
 
 
-  def current_user
-
-    User.find_by(id: session[:user_id])
-  end
 
 
 end

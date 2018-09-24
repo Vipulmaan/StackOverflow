@@ -5,6 +5,10 @@
   <%= @user.email %>
   <br>
   <br>
-  <%= link_to "Questions", user_questions_path(@user.id) %>
-
+  <h3> Reputation :- </h3> &nbsp &nbsp <%= @vote %> <br> <br>
+  <%= link_to "Questions", user_questions_path(@user.id) %>  &nbsp &nbsp&nbsp &nbsp
+  <%= link_to "Tags", user_tags_path(@user.id) %> &nbsp &nbsp&nbsp &nbsp
+  <% if current_user.id == @user.id %>
+    <%= link_to "Deactivate", user_path(@user.id), method: :delete, data: {confirmation: "are you sure?"} %>
+  <% end %>
 </div>
