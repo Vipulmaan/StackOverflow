@@ -21,7 +21,6 @@ class VotesController < ApplicationController
   def total_upvote
     @parent = parent
     vote_service_call.total_upvote(@parent)
-
   end
 
   def total_downvote

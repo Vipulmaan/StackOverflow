@@ -27,7 +27,11 @@ class UsersController < ApplicationController
   end
 
   def index
-    @questions = Question.all
+
+    @questions = Question.all.sort_by do |question|
+      question.votes.sum(:vote)
+    end.reverse
+
   end
 
 

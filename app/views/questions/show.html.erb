@@ -1,11 +1,15 @@
 
 <div>
-
+  <%= link_to "Home", users_path %> <br> <br> &nbsp
+  &nbsp
   <h2> <%= @question.title %> </h2> <br>
 
   <h3> <%= @question.body %> </h3> <br><br>
 
-  <%= link_to "favorite", {controller:'favorite_questions',action:'create', question_id:@question.id }%>
+  <%= link_to "favorite", {controller: 'favorite_questions', action: 'create', question_id: @question.id}, method: :post %>
+  &nbsp
+  &nbsp
+  <%= link_to "unfavorite", {controller: 'favorite_questions', action: 'destroy', question_id: @question.id}, method: :delete %>
   &nbsp
   &nbsp
   <%= link_to "upvote", user_question_votes_path(@user.id, @question.id, :upvote => "upvote", :type => "Question"), method: :post %>

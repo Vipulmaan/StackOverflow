@@ -1,3 +1,4 @@
+
 class Question < ApplicationRecord
 
   belongs_to :user
@@ -9,4 +10,5 @@ class Question < ApplicationRecord
   has_many :votes, as: :votable, dependent: :destroy
   validates :title, presence: true, :length => { :in => 5..1000 }
   validates :body, presence: true
+
 end
