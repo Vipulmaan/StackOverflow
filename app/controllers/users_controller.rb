@@ -3,23 +3,6 @@ class UsersController < ApplicationController
   before_action :save_login_state, :only => [:new, :create]
   attr_accessor :salts, :encrypted_passwords
 
-  # before_action :encrypt_password, only: [:create]
-  # after_action :clear_password
-
-  # private
-  #
-  # def encrypt_password
-  #
-  #   if params[:user][:password].present?
-  #     self.salts = BCrypt::Engine.generate_salt
-  #     self.encrypted_passwords = BCrypt::Engine.hash_secret(params[:user][:password], self.salts)
-  #   end
-  # end
-  #
-  # def clear_password
-  #   params[:password]
-  # end
-
   public
 
   def new
@@ -45,22 +28,24 @@ class UsersController < ApplicationController
     # @user.salt = self.salts
     # @user.encrypted_password = self.encrypted_passwords
 
+    if @user.password == @user.password_confirmation
+      if @user.save
+        flash[:notice] = 'Successful sign up ....'
+        redirect_to(root_url)
 
-    if @user.save
-      flash[:notice] = 'Successful sign up ....'
-      redirect_to(root_url)
-
+      else
+        flash[:notice] = 'Invalid entry....'
+        render 'new'
+      end
     else
-      flash[:notice] = 'Invalid entry....'
+      flash[:notice] = 'Password and confirmation password are not same....'
       render 'new'
     end
   end
 
 
   def user_params
-    if params[:password] == params[:password_confirmation]
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
-    end
   end
 
   def destroy
