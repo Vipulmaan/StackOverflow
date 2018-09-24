@@ -7,8 +7,15 @@ class QuestionsController < ApplicationController
   end
 
   def index
+    if params[:favorite_question]
+      user = User.find(params[:user_id])
+      favorite_questions = user.favorite_questions
+      @favorite_questions_id = favorite_questions.pluck(:question_id)
+      @questions = Question.where(:id => @favorite_questions_id)
+    else
     @questions = Question.where(user_id: params[:user_id])
     @question = Question.new(user_id: params[:user_id])
+    end
   end
 
   def show
