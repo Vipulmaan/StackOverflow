@@ -6,10 +6,21 @@
   <h3> <%= @question.body %> </h3> <br><br>
 
   <%= link_to "favorite", {controller:'favorite_questions',action:'create', question_id:@question.id }%>
+  &nbsp
+  &nbsp
   <%= link_to "upvote", user_question_votes_path(@user.id, @question.id, :upvote => "upvote", :type => "Question"), method: :post %>
   &nbsp
   &nbsp
   <%= link_to "downvote", user_question_votes_path(@user.id, @question.id, :downvote => "downvote", :type => "Question"), method: :post %>
+  &nbsp
+  &nbsp
+  <%= link_to "remove upvote", user_question_votes_path(@user.id, @question.id, :remove_upvote => "remove_upvote", :type => "Question"), method: :post %>
+  &nbsp
+  &nbsp
+  <%= link_to "remove downvote", user_question_votes_path(@user.id, @question.id, :remove_downvote => "remove_downvote", :type => "Question"), method: :post %>
+  &nbsp
+  &nbsp
+  <%= link_to "total vote ", user_question_votes_path(@user.id, @question.id) %>
 
   <% if current_user == @user %>
     &nbsp

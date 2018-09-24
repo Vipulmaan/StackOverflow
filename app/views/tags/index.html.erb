@@ -1,4 +1,4 @@
-<h1><%= current_user.name %> </h1>
+
 
 <% @tags.each do |tag| %>
   <p>
@@ -6,7 +6,9 @@
   </p>
   <% if tag.taggable_id==current_user.id %>
   <%= link_to "destroy",user_tag_path(tag.taggable_id,tag.id) , method: :delete , data: {confirmation: "are you sure?"} %>
-  <%= link_to "edit",  edit_user_tag_path(tag.taggable_id,tag.id) %>
+    &nbsp &nbsp  <%= link_to "edit", edit_user_tag_path(tag.taggable_id, tag.id) %>
     <%end %>
 <% end %>
+&nbsp &nbsp
+<br> <br>
 <%= link_to "add tag", new_user_tag_path(current_user.id) %>

@@ -9,10 +9,9 @@ class UsersController < ApplicationController
   private
 
   def encrypt_password
-    #debugger
+
     if params[:user][:password].present?
       self.salts = BCrypt::Engine.generate_salt
-      #debugger
       self.encrypted_passwords = BCrypt::Engine.hash_secret(params[:user][:password], self.salts)
     end
   end
@@ -36,6 +35,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def all_users
+    @users = User.all
+  end
+
   def create
     # render plain:  params[:user]
     @user = User.new(user_params)
@@ -56,16 +59,15 @@ class UsersController < ApplicationController
 
   def user_params
     if params[:password] == params[:password_confirmation]
-
       params.require(:user).permit(:name, :email)
-
     end
   end
 
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = 'User successfully deleted!'
-    redirect_to (users_url)
-
+    redirect_to '/logout'
   end
+
+
 end

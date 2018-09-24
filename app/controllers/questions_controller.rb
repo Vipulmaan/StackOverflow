@@ -2,9 +2,8 @@ class QuestionsController < ApplicationController
 
   before_action :authorize_user, only: [:edit, :update, :destroy]
 
-
   def new
-    @question = Question.new(user_id: params[:user_id])
+    @question = Question.new(user_id: current_user.id)
   end
 
   def index
@@ -19,14 +18,12 @@ class QuestionsController < ApplicationController
     @answers = @question.answers
     @answer = Answer.new(:user_id => current_user.id, :question_id => @question.id)
     @comments = @question.comments
-    @comment = @question.comments.new("user_id" => params[:user_id])
+    @comment = @question.comments.new("user_id" => current_user.id)
     @tags = @question.tags
     @tag = Tag.new
-
   end
 
   def create
-
     @question = Question.new(question_params)
     @question.user_id = current_user.id
     if @question.save
