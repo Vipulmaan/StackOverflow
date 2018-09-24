@@ -12,6 +12,7 @@ class User < ApplicationRecord
   validates :name, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
   validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
   validates :password, :presence => true, :length => { :in => 6..20 }
+  validates :password_confirmation, :presence => true, :length => { :in => 6..20 }
   before_save :encrypt_password
   after_save :clear_password
 
