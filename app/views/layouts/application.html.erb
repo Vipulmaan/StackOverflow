@@ -10,7 +10,9 @@
   </head>
   <body> &nbsp&nbsp&nbsp
 
-  &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp
+  <%= link_to "Home", users_path if current_user %> &nbsp
+
+  &nbsp&nbsp&nbsp &nbsp
 
   <% if flash[:notice] %>
     <div class="notification is-primary global-notification">
