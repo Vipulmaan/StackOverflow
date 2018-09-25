@@ -1,7 +1,8 @@
 class TagsController < ApplicationController
 
   before_action :authenticate_user
-
+  before_action :parent_exists
+  before_action :tag_exists, only: [:edit, :update, :destory]
   def index
     @tags = parent.tags
   end
@@ -66,6 +67,24 @@ class TagsController < ApplicationController
     else
       TagService.new({taggable_type: "Question", taggable_id: params[:question_id]})
     end
+  end
 
+  def parent_exists
+    if params[:question_id]
+      unless Question.exists?(id: params[:question_id], user_id: params[:user_id])
+        render plain: "Question not exist"
+      end
+    else
+      unless User.exists?(id: params[:user_id])
+        render plain: "User not exists"
+      end
+    end
+  end
+
+
+  def tag_exists
+    unless Tag.exists?(id: params[:id])
+      render plain: "tag not exist"
+    end
   end
 end

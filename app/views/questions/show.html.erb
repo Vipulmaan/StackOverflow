@@ -32,6 +32,7 @@
     &nbsp <%= link_to "Edit", edit_user_question_path(@question.user_id, @question.id) %> &nbsp &nbsp
     <%= link_to "delete", user_question_path(@question.user_id, @question.id), method: :delete, data: {confirm: "you sure?"} %>
     <%= render "tags/tag_for_question" %>
+
   <% end %>
   <br><br>
   <h3> comments </h3>
