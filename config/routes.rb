@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   root 'sessions#index'
   post'/loginattempt' , to:  "sessions#login_attempt"
   get "/logout", to: "sessions#logout"
-  get "/favorite", to: "favorite_questions#create"
+  post "/favorite", to: "favorite_questions#create"
+  delete "/unfavorite", to: "favorite_questions#destroy"
   get "/all_users", to: "users#all_users"
+  get '/all_questions', to: 'questions#index'
 
   root to:  "sessions#login"
   get  "/signup", to: "users#new"

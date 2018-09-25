@@ -3,6 +3,9 @@ class UsersController < ApplicationController
   before_action :save_login_state, :only => [:new, :create]
   attr_accessor :salts, :encrypted_passwords
 
+  before_action :user_exists?, :only => [:show]
+  before_action :authenticate_user, :except => [:new, :create]
+
   public
 
   def new
@@ -10,7 +13,12 @@ class UsersController < ApplicationController
   end
 
   def index
-    @questions = Question.all
+    if params[:data]
+      search_service = SearchService.new({class: User, column: params[:column], data: params[:data]})
+      @users = search_service.search
+    else
+      @users = User.all
+    end
   end
 
 
@@ -18,12 +26,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def all_users
-    @users = User.all
-  end
 
   def create
-    # render plain:  params[:user]
     @user = User.new(user_params)
     # @user.salt = self.salts
     # @user.encrypted_password = self.encrypted_passwords
@@ -32,6 +36,7 @@ class UsersController < ApplicationController
       if @user.save
         flash[:notice] = 'Successful sign up ....'
         redirect_to(root_url)
+
 
       else
         flash[:notice] = 'Invalid entry....'
@@ -48,10 +53,19 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
+
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = 'User successfully deleted!'
     redirect_to '/logout'
+  end
+
+  private
+
+  def user_exists?
+    unless User.exists?(id: params[:id])
+      render plain: "user not exist"
+    end
   end
 
 

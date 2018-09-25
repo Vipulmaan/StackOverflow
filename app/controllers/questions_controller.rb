@@ -1,14 +1,31 @@
 class QuestionsController < ApplicationController
 
   before_action :authorize_user, only: [:edit, :update, :destroy]
+  before_action :question_exists, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user
+
 
   def new
     @question = Question.new(user_id: current_user.id)
   end
 
   def index
+
+    if params[:favorite_question]
+      user = User.find(params[:user_id])
+      favorite_questions = user.favorite_questions
+      @favorite_questions_id = favorite_questions.pluck(:question_id)
+      @questions = Question.where(:id => @favorite_questions_id)
+    elsif params[:user_id]
     @questions = Question.where(user_id: params[:user_id])
     @question = Question.new(user_id: params[:user_id])
+    elsif params[:data]
+      @questions = call_search_sevice
+    else
+      @questions = Question.all.sort_by do |question|
+        question.votes.sum(:vote)
+      end.reverse
+    end
   end
 
   def show
@@ -33,9 +50,11 @@ class QuestionsController < ApplicationController
     end
   end
 
+
   def edit
     @question = Question.find_by(id: params[:id])
   end
+
 
   def update
     @question = Question.find(params[:id])
@@ -44,8 +63,8 @@ class QuestionsController < ApplicationController
     else
       render 'edit'
     end
-
   end
+
 
   def destroy
     Question.find(params[:id]).destroy
@@ -53,6 +72,7 @@ class QuestionsController < ApplicationController
   end
 
   private
+
 
   def authorize_user
     @question = Question.find(params[:id])
@@ -64,8 +84,21 @@ class QuestionsController < ApplicationController
 
   end
 
+
   def question_params
     params.require(:question).permit(:title, :body)
+  end
+
+
+  def call_search_sevice
+    search_service = SearchService.new({class: Question, column: params[:column], data: params[:data]})
+    search_service.search
+  end
+
+  def question_exists
+    unless Question.exists?(params[:id])
+      render plain: "question not exist"
+    end
   end
 
 
