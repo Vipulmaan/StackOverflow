@@ -1,6 +1,7 @@
 class ProfileController < ApplicationController
 
   before_action :authenticate_user
+  before_action :user_exists
 
   def index
     @user = User.find_by(id: params[:user_id])
@@ -22,6 +23,13 @@ class ProfileController < ApplicationController
     end
     return upvote - downvote
 
+  end
+
+
+  def user_exists
+    unless User.exists?(id: params[:user_id])
+      render plain: "user not exists"
+    end
   end
 
 end

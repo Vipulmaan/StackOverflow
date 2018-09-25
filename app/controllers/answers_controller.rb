@@ -1,7 +1,10 @@
 class AnswersController < ApplicationController
 
-  before_action :valid_user, only: [:edit, :update, :destroy]
+  # before_action :question_exists
+  before_action :answer_exists, only: [:show, :edit, :update, :destroy]
+  before_action :authorized_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user
+
   # before_action :answer_exists , only:[]
 
   def create
@@ -11,6 +14,22 @@ class AnswersController < ApplicationController
     @answer.user_id = current_user.id
     @answer.save
     redirect_to user_question_path(@question.user_id, @question.id)
+  end
+
+
+  def index
+    @question = Question.find(params[:question_id])
+    @answers = @question.answers
+  end
+
+  def show
+
+    @answer = Answer.find(params[:id])
+    if params[:validity]
+      Answer.correct_answer(params[:question_id], params[:id])
+      flash.now[:notice] = "success"
+    end
+
   end
 
   def edit
@@ -41,7 +60,7 @@ class AnswersController < ApplicationController
     params.require(:answer).permit(:description)
   end
 
-  def authorized user
+  def authorized_user
     @answer = Answer.find(params[:id])
     @user = User.find(@answer.user_id)
     @question = Question.find(params[:question_id])
@@ -52,10 +71,16 @@ class AnswersController < ApplicationController
   end
 
   def answer_exists
-    unless Answer.exists?(params[:id])
+    unless Answer.exists?(id: params[:id])
       render plain: "answer not exist "
     end
   end
+
+  # def question_exists
+  #   unless Question.exists?(id: params[:question_id] , user_id: params[:user_id])
+  #     render plain: "question not exist "
+  #   end
+  # end
 
 
 end

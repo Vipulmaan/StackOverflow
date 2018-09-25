@@ -1,6 +1,7 @@
 class FavoriteQuestionsController < ApplicationController
 
   before_action :authenticate_user
+  before_action :question_exists
 
   def new
     @favorite = UserFavoriteQuestion.new
@@ -35,6 +36,12 @@ class FavoriteQuestionsController < ApplicationController
       return true
     else
       return false
+    end
+  end
+
+  def question_exists
+    unless Question.exists?(id: params[:question_id])
+      render plain: "Question not exist"
     end
   end
 end

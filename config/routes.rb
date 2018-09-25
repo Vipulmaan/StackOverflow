@@ -9,15 +9,15 @@ Rails.application.routes.draw do
   get "/logout", to: "sessions#logout"
   post "/favorite", to: "favorite_questions#create"
   delete "/unfavorite", to: "favorite_questions#destroy"
-  get "/all_users", to: "users#all_users"
   get '/all_questions', to: 'questions#index'
 
   root to:  "sessions#login"
   get  "/signup", to: "users#new"
   get "/login", :to => "sessions#login"
   get "/home", :to => "sessions#home"
-  get "/profile", :to => "sessions#profile"
+  # get "/profile", :to => "sessions#profile"
   get "/setting", :to => "sessions#setting"
+  get ":user_id/profile", :to => "profile#index", :as => "profile"
 
 
   concern :commentable do
@@ -33,7 +33,6 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    resources :profile
     resources :tags , concerns: :taggable
     resources :questions, concerns: :commentable do
       resources :answers, concerns: :commentable
