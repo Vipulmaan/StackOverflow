@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
   before_action :valid_user, only: [:edit, :update, :destroy]
-
+  before_action :authenticate_user
   def edit
     @comment = Comment.find_by(id: params[:id])
     @user = User.find(params[:user_id])

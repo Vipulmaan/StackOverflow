@@ -1,9 +1,11 @@
 class ProfileController < ApplicationController
 
+  before_action :authenticate_user
 
   def index
     @user = User.find_by(id: params[:user_id])
     @vote = total_votes(@user.id)
+    @user.update_attribute(:reputation, @vote)
   end
 
   def total_votes(id)

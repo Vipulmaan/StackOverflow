@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
 
+  before_action :authenticate_user
 
   def index
     @tags = parent.tags
@@ -15,7 +16,6 @@ class TagsController < ApplicationController
 
     tag_service_call.create_tag(params[:tag][:name])
     find_route
-
   end
 
 
