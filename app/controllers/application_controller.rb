@@ -31,7 +31,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
+  def user_logged_in?
+    if session[:user_id]
+      return true
+    else
+      render root_url
+      return false
+    end
+  end
 
 
 end

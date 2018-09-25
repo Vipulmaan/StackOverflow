@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post "/favorite", to: "favorite_questions#create"
   delete "/unfavorite", to: "favorite_questions#destroy"
   get "/all_users", to: "users#all_users"
+  get '/all_questions', to: 'questions#index'
 
   root to:  "sessions#login"
   get  "/signup", to: "users#new"

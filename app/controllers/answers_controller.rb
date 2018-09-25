@@ -1,6 +1,8 @@
 class AnswersController < ApplicationController
 
   before_action :valid_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user
+  # before_action :answer_exists , only:[]
 
   def create
     @user = User.find(params[:user_id])
@@ -39,13 +41,19 @@ class AnswersController < ApplicationController
     params.require(:answer).permit(:description)
   end
 
-  def valid_user
+  def authorized user
     @answer = Answer.find(params[:id])
     @user = User.find(@answer.user_id)
     @question = Question.find(params[:question_id])
     unless isadmin?(@user)
       flash.now[:danger] = "You do not have authorization to edit this post"
       redirect_to user_question_path(params[:user_id], @question.id)
+    end
+  end
+
+  def answer_exists
+    unless Answer.exists?(params[:id])
+      render plain: "answer not exist "
     end
   end
 

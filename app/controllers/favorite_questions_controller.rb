@@ -1,5 +1,7 @@
 class FavoriteQuestionsController < ApplicationController
 
+  before_action :authenticate_user
+
   def new
     @favorite = UserFavoriteQuestion.new
   end

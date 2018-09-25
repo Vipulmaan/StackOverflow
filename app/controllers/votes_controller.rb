@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-
+  before_action :authenticate_user
 
   def create
     if (params[:upvote])

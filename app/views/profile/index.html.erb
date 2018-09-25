@@ -3,8 +3,6 @@
   <%= @user.name %>
   <h3> Email :- </h3>
   <%= @user.email %>
-  <br>
-  <br>
   <h3> Reputation :- </h3> &nbsp &nbsp <%= @vote %> <br> <br>
   <%= link_to "Questions", user_questions_path(@user.id) %>  &nbsp &nbsp&nbsp &nbsp
   <%= link_to "Tags", user_tags_path(@user.id) %> &nbsp &nbsp&nbsp &nbsp

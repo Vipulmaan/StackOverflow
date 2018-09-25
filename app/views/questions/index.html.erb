@@ -1,8 +1,24 @@
+<%= link_to "Logout", '/logout' %>  &nbsp
+&nbsp
+
+<%= link_to "Ask Question", new_user_question_path(current_user.id) %>  &nbsp
+&nbsp
+<%= link_to "profile", user_profile_index_path(current_user.id) %>  &nbsp
+&nbsp
+<%= link_to "Add Tags", user_tags_path(current_user.id) %> &nbsp&nbsp
+
+<%= link_to "All Users ", users_path %>  &nbsp&nbsp
+
+<%= form_for(all_questions_path, method: :get) do %>
+  Title <%= text_field_tag :data, params[:data] %>
+  <%= hidden_field_tag :column, "title" %>
+  <%= submit_tag 'Search', name: nil %>
+<% end %>
+
 <h1>Questions </h1>
 
 <% @questions.each do |question| %>
   <p>
-
     <%= link_to question.title, user_question_path(question.user_id, question.id) %>
     <br>
   </p>
