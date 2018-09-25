@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2018_09_25_050051) do
 
-  create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "description"
     t.bigint "question_id"
     t.datetime "created_at", null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2018_09_25_050051) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.datetime "created_at", null: false

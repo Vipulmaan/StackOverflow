@@ -34,6 +34,7 @@ class UsersController < ApplicationController
 
     if @user.password == @user.password_confirmation
       if @user.save
+        debugger
         flash[:notice] = 'Successful sign up ....'
         redirect_to(root_url)
 
@@ -43,15 +44,13 @@ class UsersController < ApplicationController
         render 'new'
       end
     else
-      flash[:notice] = 'Password and confirmation password are not same....'
+      flash[:error] = 'Password and confirmation password are not same....'
       render 'new'
     end
   end
 
 
-  def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
+
 
 
   def destroy
@@ -60,12 +59,31 @@ class UsersController < ApplicationController
     redirect_to '/logout'
   end
 
+  def edit
+    @user=User.find(params[:id])
+  end
+
+  def update
+    user=User.find(params[:id])
+ #   @user= user.update_attributs(name: params[:user][:name])
+   #   redirect_to user_profile_index_path(@user.id)
+
+  end
+
   private
 
   def user_exists?
     unless User.exists?(id: params[:id])
       render plain: "user not exist"
     end
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def user_update_params
+    params.require(:user).permit(:name, :email)
   end
 
 

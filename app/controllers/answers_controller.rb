@@ -1,11 +1,11 @@
 class AnswersController < ApplicationController
 
+
   # before_action :question_exists
   before_action :answer_exists, only: [:show, :edit, :update, :destroy]
   before_action :authorized_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user
 
-  # before_action :answer_exists , only:[]
 
   def create
     @user = User.find(params[:user_id])
