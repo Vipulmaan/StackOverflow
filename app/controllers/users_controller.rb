@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   before_action :save_login_state, :only => [:new, :create]
   attr_accessor :salts, :encrypted_passwords
+
   before_action :user_exists?, :only => [:show]
   before_action :authenticate_user, :except => [:new, :create]
 
@@ -28,22 +29,28 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    # @user.salt = self.salts
+    # @user.encrypted_password = self.encrypted_passwords
 
-    if @user.save
-      flash[:notice] = 'Successful sign up ....'
-      redirect_to(root_url)
+    if @user.password == @user.password_confirmation
+      if @user.save
+        flash[:notice] = 'Successful sign up ....'
+        redirect_to(root_url)
 
+
+      else
+        flash[:notice] = 'Invalid entry....'
+        render 'new'
+      end
     else
-      flash[:notice] = 'Invalid entry....'
+      flash[:notice] = 'Password and confirmation password are not same....'
       render 'new'
     end
   end
 
 
   def user_params
-    if params[:password] == params[:password_confirmation]
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
-    end
   end
 
 

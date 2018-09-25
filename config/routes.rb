@@ -46,6 +46,6 @@ Rails.application.routes.draw do
     resources :answers, only: [:index, :edit, :destroy, :show, :update], concerns: :commentable
     resources :comments, only: [:index, :edit, :destroy, :show, :update]
   end
-
+  get '*path' => redirect('/')
 
 end
