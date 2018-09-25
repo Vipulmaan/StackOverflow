@@ -23,6 +23,18 @@
     &nbsp
     &nbsp &nbsp
     &nbsp
+    <% if answer.correct %>
+      <h3>valid answer</h3>
+    <% end %>
+
+    <% if Question.find(@question.id).user_id == current_user.id %>
+
+      <%= link_to "Valid", user_question_answer_path(@user.id, @question.id, answer.id, :validity => "valid") %>
+
+    <% end %>
+    &nbsp
+    &nbsp &nbsp
+    &nbsp
     <% if answer.user_id == current_user.id %>
       <%= link_to "edit", edit_user_question_answer_path(@user.id, answer.question_id, answer.id) %>
       &nbsp

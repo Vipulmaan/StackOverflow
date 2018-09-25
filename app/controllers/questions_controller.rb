@@ -1,9 +1,10 @@
 class QuestionsController < ApplicationController
 
-  before_action :authorize_user, only: [:edit, :update, :destroy]
-  before_action :question_exists, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user
 
+  before_action :authenticate_user
+  #before_action :user_exists , only: [:index]
+  before_action :question_exists, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:edit, :update, :destroy]
 
   def new
     @question = Question.new(user_id: current_user.id)
@@ -12,10 +13,14 @@ class QuestionsController < ApplicationController
   def index
 
     if params[:favorite_question]
+      if user_exists?
       user = User.find(params[:user_id])
       favorite_questions = user.favorite_questions
       @favorite_questions_id = favorite_questions.pluck(:question_id)
       @questions = Question.where(:id => @favorite_questions_id)
+      else
+        render plain: "User not exists"
+      end
     elsif params[:user_id]
     @questions = Question.where(user_id: params[:user_id])
     @question = Question.new(user_id: params[:user_id])
@@ -29,9 +34,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-
     @user = User.find(params[:user_id])
-    @question = Question.find_by(id: params[:id])
+    @question = Question.find(params[:id])
     @answers = @question.answers
     @answer = Answer.new(:user_id => current_user.id, :question_id => @question.id)
     @comments = @question.comments
@@ -96,9 +100,13 @@ class QuestionsController < ApplicationController
   end
 
   def question_exists
-    unless Question.exists?(params[:id])
+    unless Question.exists?(id: params[:id], user_id: params[:user_id])
       render plain: "question not exist"
     end
+  end
+
+  def user_exists?
+    User.exists?(id: params[:user_id])
   end
 
 

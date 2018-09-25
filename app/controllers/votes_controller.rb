@@ -1,5 +1,7 @@
 class VotesController < ApplicationController
   before_action :authenticate_user
+  before_action :question_exist
+
 
   def create
     if (params[:upvote])
@@ -77,6 +79,12 @@ class VotesController < ApplicationController
       flash.notice = "remove downvote"
     else
       flash.notice = "you need to first downvote"
+    end
+  end
+
+  def question_exist
+    unless Question.exists?(id: params[:question_id], user_id: params[:user_id])
+      render plain: "question not exist"
     end
   end
 

@@ -1,7 +1,12 @@
 class CommentsController < ApplicationController
 
-  before_action :valid_user, only: [:edit, :update, :destroy]
+
   before_action :authenticate_user
+  before_action :parent_exists, only: [:show, :edit, :update, :destroy]
+  before_action :comment_exists, only: [:show, :edit, :update, :destroy]
+  before_action :authorized_user, only: [:edit, :update, :destroy]
+
+
   def edit
     @comment = Comment.find_by(id: params[:id])
     @user = User.find(params[:user_id])
@@ -12,6 +17,16 @@ class CommentsController < ApplicationController
       render :partial => "comments/edit_comment_for_answer"
     end
   end
+
+
+  def index
+    redirect_to user_question_path(params[:user_id], params[:question_id])
+  end
+
+  def show
+    redirect_to user_question_path(params[:user_id], params[:question_id])
+  end
+
 
   def create
     @parent = parent
@@ -48,13 +63,14 @@ class CommentsController < ApplicationController
     end
   end
 
-  def valid_user
+  def authorized_user
     @comment = Comment.find(params[:id])
     @user = User.find(@comment.user_id)
     unless isadmin?(@user)
       flash.now[:danger] = "You do not have authorization to edit this post"
       find_route
     end
+
   end
 
   def commentable_key
@@ -73,6 +89,39 @@ class CommentsController < ApplicationController
       redirect_to user_question_path(params[:user_id], @answer.question_id)
     else
       redirect_to user_question_path(params[:user_id], params[:question_id])
+    end
+  end
+
+  def parent_exists
+    unless params[:answer_id]
+      unless Comment.exists?(user_id: params[:user_id], commentable_id: params[:question_id])
+        render plain: "Question not exist"
+      end
+    else
+      if Question.exists?(id: params[:question_id], user_id: params[:user_id])
+        unless Comment.exists?(commentable_id: params[:answer_id])
+          render plain: "comments not exist"
+        end
+      else
+        render plain: "question not exist"
+      end
+    end
+
+  end
+
+
+  def comment_exists
+    unless Comment.exists?(id: params[:id])
+      render plain: "comment not exist"
+    end
+  end
+
+  def answer_exists?
+    unless Answer.exists?(id: params[:answer_id], question_id: params[:question_id], user_id: params[:user_id])
+      return false
+      render plain: "Answer not exists"
+    else
+      return true
     end
   end
 
