@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
 
-  before_action :valid_user, only: [:edit, :update, :destroy]
+  #before_action :valid_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user
   # before_action :answer_exists , only:[]
 

@@ -8,6 +8,7 @@
   <%= link_to "Tags", user_tags_path(@user.id) %> &nbsp &nbsp&nbsp &nbsp
   <%= link_to "Favorite Questions", user_questions_path(@user.id, :favorite_question => "favorite Question") %> &nbsp
   &nbsp&nbsp &nbsp
+  <%= link_to "Edit", edit_user_path(@user.id) %>
   <% if current_user.id == @user.id %>
     <%= link_to "Deactivate", user_path(@user.id), method: :delete, data: {confirmation: "are you sure?"} %>
   <% end %>

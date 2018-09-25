@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'sessions/home'
   get 'sessions/profile'
   root 'sessions#index'
-  post'/loginattempt' , to:  "sessions#login_attempt"
+  post'/login' , to:  "sessions#create"
   get "/logout", to: "sessions#logout"
   post "/favorite", to: "favorite_questions#create"
   delete "/unfavorite", to: "favorite_questions#destroy"
@@ -15,9 +15,6 @@ Rails.application.routes.draw do
   root to:  "sessions#login"
   get  "/signup", to: "users#new"
   get "/login", :to => "sessions#login"
-  get "/home", :to => "sessions#home"
-  get "/profile", :to => "sessions#profile"
-  get "/setting", :to => "sessions#setting"
 
 
   concern :commentable do
@@ -46,6 +43,7 @@ Rails.application.routes.draw do
     resources :answers, only: [:index, :edit, :destroy, :show, :update], concerns: :commentable
     resources :comments, only: [:index, :edit, :destroy, :show, :update]
   end
-  get '*path' => redirect('/')
+
+  get '*path', to: 'profile#404'
 
 end
