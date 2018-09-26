@@ -3,12 +3,12 @@ class AuthService
   def initialize(params)
     @users = params[:class]
     @name = params[:name]
-    @data = params[:data]
+    @password = params[:password]
   end
 
 
-  def search
-    @search_in.where("#{@column_name} LIKE ?", "%#{@data}%")
+  def auth
+    @users.where(name: @name , password: @password)
   end
 
 

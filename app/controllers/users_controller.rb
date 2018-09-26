@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :save_login_state, :only => [:new, :create]
-  attr_accessor :salts, :encrypted_passwords
+  #attr_accessor :salts, :encrypted_passwords
 
   before_action :user_exists?, :only => [:show]
   before_action :authenticate_user, :except => [:new, :create]
@@ -29,12 +29,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    # @user.salt = self.salts
-    # @user.encrypted_password = self.encrypted_passwords
 
     if @user.password == @user.password_confirmation
       if @user.save
-        debugger
+        #debugger
         flash[:notice] = 'Successful sign up ....'
         redirect_to(root_url)
 
@@ -65,6 +63,7 @@ class UsersController < ApplicationController
 
   def update
     user=User.find(params[:id])
+    debugger
  #   @user= user.update_attributs(name: params[:user][:name])
    #   redirect_to user_profile_index_path(@user.id)
 

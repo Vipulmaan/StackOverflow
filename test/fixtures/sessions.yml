@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  Token: MyString
+  Login_time: 2018-09-26 14:45:59
+  Logout_time: 2018-09-26 14:45:59
+  State: false
+
+two:
+  user: two
+  Token: MyString
+  Login_time: 2018-09-26 14:45:59
+  Logout_time: 2018-09-26 14:45:59
+  State: false
