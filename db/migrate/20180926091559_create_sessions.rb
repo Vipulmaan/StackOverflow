@@ -6,8 +6,13 @@ class CreateSessions < ActiveRecord::Migration[5.2]
       t.datetime :Login_time
       t.datetime :Logout_time
       t.boolean :State
-
+      t.string :salt
       t.timestamps
     end
   end
+
+  def self.create_token(id)
+
+  end
+
 end

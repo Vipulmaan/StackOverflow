@@ -63,9 +63,10 @@ class UsersController < ApplicationController
 
   def update
     user=User.find(params[:id])
-    debugger
- #   @user= user.update_attributs(name: params[:user][:name])
-   #   redirect_to user_profile_index_path(@user.id)
+    #debugger
+    @user= user.update(name: params[:user][:name])
+    #debugger
+      redirect_to profile_path(params[:id])
 
   end
 
