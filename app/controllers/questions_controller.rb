@@ -19,7 +19,7 @@ class QuestionsController < ApplicationController
       @favorite_questions_id = favorite_questions.pluck(:question_id)
       @questions = Question.where(:id => @favorite_questions_id)
       else
-        render plain: "User not exists"
+        render plain: "User not exists-"
       end
     elsif params[:user_id]
     @questions = Question.where(user_id: params[:user_id])

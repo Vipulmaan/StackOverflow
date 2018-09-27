@@ -11,8 +11,8 @@ class User < ApplicationRecord
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\Z/i
   validates :name, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
   validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
-  validates :password, :presence => true, :length => { :in => 6..20 }
-  validates :password_confirmation, :presence => true, :length => { :in => 6..20 }
+  validates :password, :presence => true, :length => { :in => 6..20 }, :on => :update
+  validates :password_confirmation, :presence => true, :length => { :in => 6..20 }, :on => :update
   before_save :encrypt_password
   after_save :clear_password
 
