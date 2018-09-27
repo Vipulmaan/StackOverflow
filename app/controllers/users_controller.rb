@@ -64,7 +64,7 @@ class UsersController < ApplicationController
   def update
     user=User.find(params[:id])
     #debugger
-    @user= user.update(name: params[:user][:name])
+    @user= user.update(name: params[:user][:name], email: params[:user][:email])
     #debugger
       redirect_to profile_path(params[:id])
 
