@@ -16,8 +16,10 @@ Rails.application.routes.draw do
   get "/login", :to => "sessions#login"
   get "/home", :to => "sessions#home"
   get "/setting", :to => "sessions#setting"
-  get ":user_id/profile", :to => "profile#index", :as => "profile"
 
+  get "/users/:user_id/questions/:id/answers/:answer_id/valid_answer" , :to => "questions#valid_answer" ,:as => "valid_answer"
+   # get '/404', to: 'errors#not_found'
+   # get '/500', to: 'errors#internal_server_error'
 
 
   concern :commentable do
@@ -46,6 +48,8 @@ Rails.application.routes.draw do
     resources :comments, only: [:index, :edit, :destroy, :show, :update]
   end
 
-  get '*path', to: 'profile#404'
+ # match  ':status' , to: 'errors#show' ,constraints:{status: /\d{3}/}, via: :all
+   get '*path', to: 'errors#route_not_found'
+ # match '404', to: redirect("/")
 
 end

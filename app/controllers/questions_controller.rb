@@ -2,40 +2,35 @@ class QuestionsController < ApplicationController
 
 
   before_action :authenticate_user
-  #before_action :user_exists , only: [:index]
-  before_action :question_exists, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user, only: [:edit, :update, :destroy]
+  before_action :find_user , except: [:index,:new,:create]
+  before_action :find_question, only: [:valid_answer, :show, :edit, :update, :destroy]
+  before_action :update_question , only: [ :valid_answer, :edit, :update, :destroy]
+
 
   def new
     @question = Question.new(user_id: current_user.id)
   end
 
+
   def index
 
     if params[:favorite_question]
-      if user_exists?
-      user = User.find(params[:user_id])
-      favorite_questions = user.favorite_questions
-      @favorite_questions_id = favorite_questions.pluck(:question_id)
-      @questions = Question.where(:id => @favorite_questions_id)
-      else
-        render plain: "User not exists-"
-      end
+
+       favorite_questions
+
     elsif params[:user_id]
-    @questions = Question.where(user_id: params[:user_id])
-    @question = Question.new(user_id: params[:user_id])
+       user_specific_questions
+     @question = Question.new
     elsif params[:data]
-      @questions = call_search_sevice
+      call_search_sevice
     else
-      @questions = Question.all.sort_by do |question|
-        question.votes.sum(:vote)
-      end.reverse
+     @questions  =   Question.all_questions_sort_by_vote
     end
+
   end
 
+
   def show
-    @user = User.find(params[:user_id])
-    @question = Question.find(params[:id])
     @answers = @question.answers
     @answer = Answer.new(:user_id => current_user.id, :question_id => @question.id)
     @comments = @question.comments
@@ -46,23 +41,21 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
-    @question.user_id = current_user.id
-    if @question.save
+    if @question.save!
       redirect_to user_question_path(@question.user_id, @question.id)
     else
       render 'new'
     end
+
   end
 
 
   def edit
-    @question = Question.find_by(id: params[:id])
+
   end
 
-
   def update
-    @question = Question.find(params[:id])
-    if @question.update_attributes(question_params)
+    if @question.update_attributes!(question_params)
       redirect_to user_question_path(@question.user_id, @question.id)
     else
       render 'edit'
@@ -71,42 +64,56 @@ class QuestionsController < ApplicationController
 
 
   def destroy
-    Question.find(params[:id]).destroy
+    @question.destroy
     redirect_to user_questions_path(params[:user_id])
   end
+
+
+
+  def valid_answer
+    @question.update_attributes!(valid_answer: params[:answer_id].to_i)
+    redirect_to user_question_path(@question.user_id, @question.id) , notice: "successfully update"
+  end
+
+
 
   private
 
 
-  def authorize_user
-    @question = Question.find(params[:id])
-    @user = User.find(@question.user_id)
-    flash.now[:danger] = "You do not have authorization to edit this post"
-    unless isadmin?(@user)
-      redirect_to user_question_path(@question.user_id, @question.id)
-    end
-
-  end
-
-
   def question_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body).merge(user_id:current_user.id)
   end
 
 
   def call_search_sevice
     search_service = SearchService.new({class: Question, column: params[:column], data: params[:data]})
-    search_service.search
+    @questions= search_service.search
   end
 
-  def question_exists
-    unless Question.exists?(id: params[:id], user_id: params[:user_id])
-      render plain: "question not exist"
+  def find_question
+     @question=Question.find_by!(id: params[:id] , user_id: params[:user_id])
+  end
+
+  def find_user
+    @user=User.find_by!(id: params[:user_id])
+  end
+
+  def update_question
+    if params[:user_id] != current_user.id.to_s
+      raise Error::CustomError.new(message: "You can not do any change in this question")
     end
   end
 
-  def user_exists?
-    User.exists?(id: params[:user_id])
+  def favorite_questions
+    find_user
+    @favorite_questions_id = @user.favorite_questions.pluck(:question_id)
+    @questions = Question.where(:id => @favorite_questions_id)
+  end
+
+
+  def user_specific_questions
+    find_user
+    @questions = Question.where(user_id: params[:user_id])
   end
 
 

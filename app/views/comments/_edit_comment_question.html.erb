@@ -1,4 +1,4 @@
-<%= form_for(@comment, url: user_question_comment_path(@user.id, @comment.commentable_id, @comment.id)) do |f| %>
+<%= form_for(@comment, url: user_question_comment_path(@question.user_id, @comment.commentable_id, @comment.id)) do |f| %>
 
   <%= f.label :comment %>
   <%= f.text_field :description, class: 'form-control' %>

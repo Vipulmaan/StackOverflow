@@ -10,3 +10,21 @@
 5.times do |i|
   User.create(name: "asdf#{i}", email: "example-#{i + 1}@railstutorial.org", encrypted_password: "asdf-#{i}", salt: "qwer-#{i}")
 end
+
+# 100.times do
+#   salt=BCrypt::Engine.generate_salt
+#   name=Faker::Name.name
+#   email=Faker::Internet.free_email
+#   password=Faker::Internet.password
+#   password_digest=BCrypt::Engine.hash_secret(password,salt),
+#
+#   User.create!(
+#           name:name ,
+#           email:email ,
+#           reputation: 0,
+#           salt: salt,
+#           encrypted_password: password_digest,
+#           password:password,
+#           password_confirmation:password
+#   )
+# end

@@ -8,7 +8,7 @@
 <br>
 <% @users.each do |user| %>
   <p>
-    <%= link_to user.name, profile_path(user.id) %>   <br>
+    <%= link_to user.name, user_path(user.id) %>   <br>
   </p>
 <% end %>
 

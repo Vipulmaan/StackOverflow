@@ -11,4 +11,11 @@ class Question < ApplicationRecord
   validates :title, presence: true, :length => { :in => 5..1000 }
   validates :body, presence: true
 
+
+  def self.all_questions_sort_by_vote
+    @questions = Question.all.sort_by do |question|
+      question.votes.sum(:vote)
+    end.reverse
+  end
+
 end

@@ -12,13 +12,11 @@ class TagsController < ApplicationController
     @tag = Tag.new
   end
 
-
   def create
 
     tag_service_call.create_tag(params[:tag][:name])
     find_route
   end
-
 
   def edit
     @tag = Tag.find_by(id: params[:id])
