@@ -13,8 +13,13 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     if session[:user_id]
       # set current user object to @current_user object variable
-      @current_user = User.find session[:user_id]
-      true
+
+      #debugger
+      @token = Session.find_by(Token: session[:user_id])
+      #debugger
+      @current_user = User.find(@token.user_id)
+      return true
+
     else
       redirect_to(:controller => 'sessions', :action => 'login')
       false

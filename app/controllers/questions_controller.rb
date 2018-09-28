@@ -15,7 +15,9 @@ class QuestionsController < ApplicationController
   def index
 
     if params[:favorite_question]
+
        favorite_questions
+
     elsif params[:user_id]
        user_specific_questions
      @question = Question.new

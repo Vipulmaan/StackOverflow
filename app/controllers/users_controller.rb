@@ -1,8 +1,10 @@
   class UsersController < ApplicationController
 
+
      before_action :save_login_state, :only => [:new, :create]
      before_action :find_user, :only => [:show,:edit,:destroy,:update]
      before_action :authenticate_user, :except => [:new, :create]
+
 
 
     def new
@@ -19,6 +21,7 @@
     end
 
 
+
     def show
        @vote=  User.total_votes(@user)
     end
@@ -29,6 +32,7 @@
         if @user.save
           flash[:notice] = 'Successful sign up ....'
           redirect_to(root_url)
+
 
 
         else
@@ -53,10 +57,13 @@
 
     end
 
-    def update
-      @user= @user.update_attributes(name: params[:user][:name])
-      redirect_to user_profile_index_path(@user.id)
-    end
+
+  def update
+    user=User.find(params[:id])
+    #debugger
+    @user= user.update(name: params[:user][:name], email: params[:user][:email])
+    #debugger
+      redirect_to user_path(params[:id])
 
     private
 

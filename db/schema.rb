@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2018_09_27_221720) do
+
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "description"
@@ -42,6 +44,18 @@ ActiveRecord::Schema.define(version: 2018_09_27_221720) do
     t.integer "valid_answer"
     t.index ["title"], name: "index_questions_on_title"
     t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "Token"
+    t.datetime "Login_time"
+    t.datetime "Logout_time"
+    t.boolean "State"
+    t.string "salt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -89,10 +103,8 @@ ActiveRecord::Schema.define(version: 2018_09_27_221720) do
     t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id"
   end
 
-  add_foreign_key "answers", "questions"
-  add_foreign_key "answers", "users"
-  add_foreign_key "comments", "users"
   add_foreign_key "questions", "users"
+  add_foreign_key "sessions", "users"
   add_foreign_key "user_favorite_questions", "questions"
   add_foreign_key "user_favorite_questions", "users"
   add_foreign_key "votes", "users"
