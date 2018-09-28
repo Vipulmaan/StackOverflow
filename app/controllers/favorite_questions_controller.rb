@@ -1,47 +1,65 @@
 class FavoriteQuestionsController < ApplicationController
 
   before_action :authenticate_user
-  before_action :question_exists
+  before_action :find_question
+  before_action :find_favorite_question , except: [:new , :create ,:index]
+  before_action :favorite_questions , only:[:index]
+
+  rescue_from ActiveRecord::RecordInvalid  , :with => :show_already_favorite_message
+  rescue_from ActiveRecord::RecordNotFound  , :with => :show_already_unfavorite_message
+
 
   def new
     @favorite = UserFavoriteQuestion.new
   end
 
-  def show
 
+  def index
+    render template: 'questions#index'
   end
+
 
   def create
 
     @favorite_question = UserFavoriteQuestion.new(user_id: current_user.id, question_id: params[:question_id], favorite: true)
-    @question_user = Question.find(params[:question_id])
-    unless user_exist?
-      if @favorite_question.save
-        redirect_to user_question_path(@question_user.user_id, params[:question_id]), notice: 'success'
-      end
-    end
+    @favorite_question.save!
+        redirect_to user_question_path(@question.user_id, params[:question_id]), notice: 'successfully favorite'
+
 
   end
 
   def destroy
-    if user_exist?
-      @favorite_question = UserFavoriteQuestion.find_by(user_id: current_user.id, question_id: params[:question_id])
       @favorite_question.destroy
-    end
+      redirect_to user_question_path(@question.user_id, params[:question_id]), notice: 'successfully unfavorite'
   end
 
 
-  def user_exist?
-    if UserFavoriteQuestion.exists?(user_id: current_user.id, question_id: params[:question_id])
-      return true
-    else
-      return false
-    end
+  def find_user
+  @user=User.find_by!(id: params[:user_id])
   end
 
-  def question_exists
-    unless Question.exists?(id: params[:question_id])
-      render plain: "Question not exist"
-    end
+
+  def find_question
+   @question= Question.find_by!(id: params[:question_id] , user_id: params[:user_id])
   end
+
+  def favorite_questions
+    find_user
+    @favorite_questions_id = @user.favorite_questions.pluck(:question_id)
+    @questions = Question.where(:id => @favorite_questions_id)
+  end
+
+  def find_favorite_question
+    @favorite_question=UserFavoriteQuestion.find_by!(user_id: current_user.id , question_id: params[:question_id])
+  end
+
+
+  def show_already_favorite_message
+    redirect_to user_question_path(@question.user_id, params[:question_id]), notice: 'already favorite'
+  end
+
+  def show_already_unfavorite_message
+    redirect_to user_question_path(@question.user_id, params[:question_id]), notice: 'already unfavorite'
+  end
+
 end

@@ -1,47 +1,33 @@
 class AnswersController < ApplicationController
 
-
-  # before_action :question_exists
-  before_action :answer_exists, only: [:show, :edit, :update, :destroy]
-  before_action :authorized_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user
+  before_action :find_question
+  before_action :find_answer, only: [:show, :edit, :update, :destroy]
+  before_action :update_answer, only: [:edit, :update, :destroy]
 
 
   def create
-    @user = User.find(params[:user_id])
-    @question = Question.find(params[:question_id])
     @answer = @question.answers.new(answer_params)
-    @answer.user_id = current_user.id
-    @answer.save
+    @answer.save!
     redirect_to user_question_path(@question.user_id, @question.id)
   end
 
 
   def index
-    @question = Question.find(params[:question_id])
     @answers = @question.answers
   end
 
   def show
-
-    @answer = Answer.find(params[:id])
-    if params[:validity]
-      Answer.correct_answer(params[:question_id], params[:id])
-      flash.now[:notice] = "success"
-    end
-
+      # Answer.correct_answer(params[:question_id], params[:id])
+      # flash.now[:notice] = "success"
   end
 
   def edit
-    @answer = Answer.find_by(id: params[:id])
-    @question = Question.find_by(id: params[:question_id])
-    @user = User.find(params[:user_id])
     render :partial => "answers/edit_answers"
   end
 
   def update
-    @answer = Answer.find(params[:id])
-    if @answer.update_attributes(answer_params)
+    if @answer.update_attributes!(answer_params)
       redirect_to user_question_path(params[:user_id], @answer.question_id)
     else
       render :partial => "answers/edit_answers"
@@ -50,37 +36,29 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    Answer.find(params[:id]).destroy
+    @answer.destroy
     redirect_to user_question_path(params[:user_id], params[:question_id])
   end
 
   private
 
   def answer_params
-    params.require(:answer).permit(:description)
+    params.require(:answer).permit(:description).merge(user_id: current_user.id)
   end
 
-  def authorized_user
-    @answer = Answer.find(params[:id])
-    @user = User.find(@answer.user_id)
-    @question = Question.find(params[:question_id])
-    unless isadmin?(@user)
-      flash.now[:danger] = "You do not have authorization to edit this post"
-      redirect_to user_question_path(params[:user_id], @question.id)
+  def find_answer
+      @answer=Answer.find_by!(id: params[:id] , question_id: params[:question_id])
+  end
+
+  def find_question
+     @question=Question.find_by!(id: params[:question_id], user_id: params[:user_id])
+  end
+
+  def update_answer
+    if find_answer.user_id != current_user.id
+      raise Error::CustomError.new(message: "You can not do any change in this answer")
     end
   end
-
-  def answer_exists
-    unless Answer.exists?(id: params[:id])
-      render plain: "answer not exist "
-    end
-  end
-
-  # def question_exists
-  #   unless Question.exists?(id: params[:question_id] , user_id: params[:user_id])
-  #     render plain: "question not exist "
-  #   end
-  # end
 
 
 end

@@ -1,90 +1,74 @@
-class UsersController < ApplicationController
+  class UsersController < ApplicationController
 
-  before_action :save_login_state, :only => [:new, :create]
-  attr_accessor :salts, :encrypted_passwords
+     before_action :save_login_state, :only => [:new, :create]
+     before_action :find_user, :only => [:show,:edit,:destroy,:update]
+     before_action :authenticate_user, :except => [:new, :create]
 
-  before_action :user_exists?, :only => [:show]
-  before_action :authenticate_user, :except => [:new, :create]
 
-  public
-
-  def new
-    @user = User.new
-  end
-
-  def index
-    if params[:data]
-      search_service = SearchService.new({class: User, column: params[:column], data: params[:data]})
-      @users = search_service.search
-    else
-      @users = User.all
+    def new
+      @user = User.new
     end
-  end
 
-
-  def show
-    @user = User.find(params[:id])
-  end
-
-
-  def create
-    @user = User.new(user_params)
-    # @user.salt = self.salts
-    # @user.encrypted_password = self.encrypted_passwords
-
-    if @user.password == @user.password_confirmation
-      if @user.save
-        debugger
-        flash[:notice] = 'Successful sign up ....'
-        redirect_to(root_url)
-
-
+    def index
+      if params[:data]
+        search_service = SearchService.new({class: User, column: params[:column], data: params[:data]})
+        @users = search_service.search
       else
-        flash[:notice] = 'Invalid entry....'
+        @users = User.all
+      end
+    end
+
+
+    def show
+       @vote=  User.total_votes(@user)
+    end
+
+    def create
+      @user = User.new(user_params)
+      if @user.password == @user.password_confirmation
+        if @user.save
+          flash[:notice] = 'Successful sign up ....'
+          redirect_to(root_url)
+
+
+        else
+          flash[:notice] = 'Invalid entry....'
+          render 'new'
+        end
+      else
+        flash[:error] = 'Password and confirmation password are not same....'
         render 'new'
       end
-    else
-      flash[:error] = 'Password and confirmation password are not same....'
-      render 'new'
     end
-  end
 
 
 
-
-
-  def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = 'User successfully deleted!'
-    redirect_to '/logout'
-  end
-
-  def edit
-    @user=User.find(params[:id])
-  end
-
-  def update
-    user=User.find(params[:id])
- #   @user= user.update_attributs(name: params[:user][:name])
-   #   redirect_to user_profile_index_path(@user.id)
-
-  end
-
-  private
-
-  def user_exists?
-    unless User.exists?(id: params[:id])
-      render plain: "user not exist"
+    def destroy
+     @user.destroy
+      flash[:success] = 'User successfully deleted!'
+      redirect_to '/logout'
     end
+
+    def edit
+
+    end
+
+    def update
+      @user= @user.update_attributes(name: params[:user][:name])
+      redirect_to user_profile_index_path(@user.id)
+    end
+
+    private
+
+
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+
+    def find_user
+      @user=User.find_by!(id: params[:id])
+    end
+
+
   end
-
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
-
-  def user_update_params
-    params.require(:user).permit(:name, :email)
-  end
-
-
-end
