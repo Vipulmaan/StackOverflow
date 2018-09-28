@@ -11,14 +11,6 @@
     &nbsp
     &nbsp &nbsp
     &nbsp
-    <%= link_to "remove downvote", user_question_answer_votes_path(@user.id, @question.id, answer.id, :remove_downvote => "remove_downvote", :type => "Answer"), method: :post %>
-    &nbsp
-    &nbsp &nbsp
-    &nbsp
-    <%= link_to "remove upvote", user_question_answer_votes_path(@user.id, @question.id, answer.id, :remove_upvote => "remove_upvote", :type => "Answer"), method: :post %>
-    &nbsp
-    &nbsp &nbsp
-    &nbsp
     <%= link_to "vote", user_question_answer_votes_path(@user.id, @question.id, answer.id) %>
     &nbsp
     &nbsp &nbsp

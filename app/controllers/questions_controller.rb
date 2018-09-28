@@ -15,20 +15,17 @@ class QuestionsController < ApplicationController
   def index
 
     if params[:favorite_question]
-
        favorite_questions
-
     elsif params[:user_id]
        user_specific_questions
      @question = Question.new
     elsif params[:data]
       call_search_sevice
     else
-     @questions  =   Question.all_questions_sort_by_vote
+      @questions = QuestionService.new.all_questions_sort_by_vote
     end
 
   end
-
 
   def show
     @answers = @question.answers

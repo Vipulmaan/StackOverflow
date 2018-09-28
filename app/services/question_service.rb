@@ -1,21 +1,10 @@
 class QuestionService
 
-  def initialize
 
+  def all_questions_sort_by_vote
+    @questions = Question.all.sort_by do |question|
+      question.votes.sum(:vote)
+    end.reverse
   end
-
-  def create_question
-
-  end
-
-  def delete_question
-
-  end
-
-
-  def update_question
-
-  end
-
 
 end

@@ -23,7 +23,7 @@
 
 
     def show
-       @vote=  User.total_votes(@user)
+      @vote = UserReputation.new.total_votes(@user)
     end
 
     def create
@@ -32,9 +32,6 @@
         if @user.save
           flash[:notice] = 'Successful sign up ....'
           redirect_to(root_url)
-
-
-
         else
           flash[:notice] = 'Invalid entry....'
           render 'new'
@@ -59,11 +56,9 @@
 
 
   def update
-    user=User.find(params[:id])
-    #debugger
-    @user= user.update(name: params[:user][:name], email: params[:user][:email])
-    #debugger
+    @user = @user.update_attributes!(name: params[:user][:name], email: params[:user][:email])
       redirect_to user_path(params[:id])
+  end
 
     private
 
