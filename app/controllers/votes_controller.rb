@@ -1,6 +1,7 @@
 class VotesController < ApplicationController
+
   before_action :authenticate_user
-  before_action :question_exist
+  before_action :find_question
 
 
   def create
@@ -8,10 +9,6 @@ class VotesController < ApplicationController
       upvote
     elsif (params[:downvote])
       downvote
-    elsif (params[:remove_upvote])
-      remove_upvote
-    elsif (params[:remove_downvote])
-      remove_downvote
     end
   end
 
@@ -33,10 +30,11 @@ class VotesController < ApplicationController
   private
 
   def parent
+    @question=find_question
     unless params[:answer_id]
-      Question.find params[:question_id]
+      @question
     else
-      Answer.find params[:answer_id]
+      find_answer
     end
   end
 
@@ -56,36 +54,20 @@ class VotesController < ApplicationController
 
   def downvote
     if vote_service_call.already_downvote?
-      flash.notice = "already downvote"
+       flash.notice = "already downvote"
     else
       vote_service_call.downvote
       flash.notice = "successfully downvote"
     end
   end
 
-  def remove_upvote
-    if vote_service_call.already_upvote?
-      vote_service_call.remove_upvote
-      flash.notice = "remove upvote"
-    else
-      flash.notice = "you need to first upvote"
-    end
+
+  def find_question
+   Question.find_by!(id: params[:question_id])
   end
 
-
-  def remove_downvote
-    if vote_service_call.already_downvote?
-      vote_service_call.remove_downvote
-      flash.notice = "remove downvote"
-    else
-      flash.notice = "you need to first downvote"
-    end
-  end
-
-  def question_exist
-    unless Question.exists?(id: params[:question_id], user_id: params[:user_id])
-      render plain: "question not exist"
-    end
+  def find_answer
+    Answer.find_by!(id: params[:answer_id], question_id: params[:question_id])
   end
 
 end

@@ -9,6 +9,8 @@ class VoteService
 
   def upvote
     if already_downvote?
+      remove_downvote
+    elsif already_zero_state?
       update_vote(find_value, 1)
     else
       cast_vote(1)
@@ -17,13 +19,15 @@ class VoteService
 
   def remove_upvote
     if already_upvote?
-      find_value.destroy
+      update_vote(find_value, 0)
     end
   end
 
   def downvote
     if already_upvote?
-      update_vote(find_value, -1)
+     remove_upvote
+    elsif  already_zero_state?
+      update_vote(find_value,-1)
     else
       cast_vote(-1)
     end
@@ -32,7 +36,7 @@ class VoteService
 
   def remove_downvote
     if already_downvote?
-      find_value.destroy
+      update_vote(find_value, 0)
     end
   end
 
@@ -46,6 +50,14 @@ class VoteService
 
   def already_downvote?
     if user_exist? && find_value.vote == -1
+      return true
+    else
+      return false
+    end
+  end
+
+  def already_zero_state?
+    if user_exist? && find_value.vote == 0
       return true
     else
       return false
@@ -73,11 +85,11 @@ class VoteService
 
   def cast_vote(vote)
     @vote = Vote.new(user_id: @user_id, votable_id: @votable_id, vote: vote, votable_type: @type)
-    @vote.save
+    @vote.save!
   end
 
   def update_vote(v, vote)
-    v.update_attributes(user_id: @user_id, votable_id: @votable_id, vote: vote)
+    v.update_attributes!(user_id: @user_id, votable_id: @votable_id, vote: vote)
   end
 
   def find_value

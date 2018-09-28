@@ -1,4 +1,4 @@
-<%= form_for(@answer, url: user_question_answer_path(@user.id, @question.id, @answer.id)) do |f| %>
+<%= form_for(@answer, url: user_question_answer_path(@question.user_id, @question.id, @answer.id)) do |f| %>
 
   <%= f.label :Answer %>
   <%= f.text_field :description, class: 'form-control' %>
