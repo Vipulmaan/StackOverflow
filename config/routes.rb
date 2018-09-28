@@ -18,38 +18,49 @@ Rails.application.routes.draw do
   get "/setting", :to => "sessions#setting"
 
   get "/users/:user_id/questions/:id/answers/:answer_id/valid_answer" , :to => "questions#valid_answer" ,:as => "valid_answer"
-   # get '/404', to: 'errors#not_found'
-   # get '/500', to: 'errors#internal_server_error'
+  # get '/404', to: 'errors#not_found'
+  # get '/500', to: 'errors#internal_server_error'
 
 
-  concern :commentable do
-    resources :comments
-  end
-
-  concern :taggable do
-    resources :tags
-  end
-
-  concern :votable do
-    resources :votes
-  end
+  # concern :commentable do
+  #   resources :comments
+  # end
+  #
+  # concern :taggable do
+  #   resources :tags
+  # end
+  #
+  # concern :votable do
+  #   resources :votes
+  # end
+  #
+  # resources :users do
+  #   resources :tags , concerns: :taggable
+  #   resources :questions, concerns: :commentable do
+  #     resources :answers, concerns: :commentable
+  #     resources :answers, concerns: :votable
+  #     resources :tags ,concerns: :taggable
+  #   end
+  #   resources :questions, concerns: :votable
+  #
+  #
+  #   resources :answers, only: [:index, :edit, :destroy, :show, :update], concerns: :commentable
+  #   resources :comments, only: [:index, :edit, :destroy, :show, :update]
+  # end
+  #
 
   resources :users do
-    resources :tags , concerns: :taggable
-    resources :questions, concerns: :commentable do
-      resources :answers, concerns: :commentable
-      resources :answers, concerns: :votable
-      resources :tags ,concerns: :taggable
+    resources :tags
+    resources :questions do
+      resources :answers, except: [:new] do
+        resources :comments, except: [:new]
+        resources :votes, only: [:index, :create]
+      end
+      resources :comments, except: [:new]
+      resources :tags
+      resources :votes, only: [:index, :create]
     end
-    resources :questions, concerns: :votable
-
-
-    resources :answers, only: [:index, :edit, :destroy, :show, :update], concerns: :commentable
-    resources :comments, only: [:index, :edit, :destroy, :show, :update]
   end
-
- # match  ':status' , to: 'errors#show' ,constraints:{status: /\d{3}/}, via: :all
-   get '*path', to: 'errors#route_not_found'
- # match '404', to: redirect("/")
+  get '*path', to: 'errors#route_not_found'
 
 end

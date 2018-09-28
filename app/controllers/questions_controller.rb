@@ -68,7 +68,7 @@ class QuestionsController < ApplicationController
 
 
   def valid_answer
-    @question.update_attributes!(valid_answer: params[:answer_id].to_i)
+    @question.update_attributes!(valid_answer_id: params[:answer_id].to_i)
     redirect_to user_question_path(@question.user_id, @question.id) , notice: "successfully update"
   end
 
