@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   before_action :authenticate_user, :only => [:home]
-  before_action :save_login_state, :only => [:login, :login_attempt]
+ # before_action :save_login_state, :only => [:login, :login_attempt]
   attr_accessor :salt, :token
 
   def encrypt_password(id)

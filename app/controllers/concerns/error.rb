@@ -15,7 +15,7 @@ module Error
         rescue_from ActiveRecord::RecordNotUnique do |e|
 
         end
-        rescue_from Error::CustomError do |e|
+        rescue_from CustomError do |e|
           respond(e.error, e.status, e.message)
         end
       end
@@ -32,6 +32,18 @@ module Error
       # flash.notice = "Error: #{_message}"
       # redirect_to(request.referrer)
     end
+  end
+
+
+  class CustomError < StandardError
+    attr_reader :status, :error, :message
+
+    def initialize(_error=nil, _status=nil, _message=nil)
+      @error = _error || 422
+      @status = _status || :unprocessable_entity
+      @message = _message || 'Something went wrong'
+    end
+
   end
 
 end

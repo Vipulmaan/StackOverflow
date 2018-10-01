@@ -20,6 +20,11 @@
   &nbsp
   &nbsp
   <%= link_to "total vote ", user_question_votes_path(@user.id, @question.id) %>
+   &nbsp
+  &nbsp
+  &nbsp
+  <%=link_to 'Tags' ,  user_question_tags_path(@user.id,@question.id) %>
+
 
   <% if current_user == @user %>
     &nbsp
@@ -37,8 +42,6 @@
   <%= render 'answers/all_answers' %><br>
   <%= render 'answers/post_answers' %>
   <br>
-  <h3> tags </h3>
-  <%= render 'tags/all_question_tags' %>
 
 </div>
 

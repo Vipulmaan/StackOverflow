@@ -1,0 +1,2 @@
+class AvailableTagsController < ApplicationController
+end

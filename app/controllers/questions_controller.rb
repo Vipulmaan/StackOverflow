@@ -32,8 +32,9 @@ class QuestionsController < ApplicationController
     @answer = Answer.new(:user_id => current_user.id, :question_id => @question.id)
     @comments = @question.comments
     @comment = @question.comments.new("user_id" => current_user.id)
-    @tags = @question.tags
-    @tag = Tag.new
+    @available_tags_id = @question.tags
+    @tags=AvailableTag.where(id: @available_tags_id)
+    @tag = AvailableTag.new
   end
 
   def create
