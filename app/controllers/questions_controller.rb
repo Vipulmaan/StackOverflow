@@ -37,7 +37,8 @@ class QuestionsController < ApplicationController
     @comment = @question.comments.new("user_id" => current_user.id)
     @tags = @question.tags
     @tag = Tag.new
-  end
+    @is_favorite = User.find_by!(id: current_user.id).favorite_questions.where(question_id: @question.id).pluck(:favorite) == [true]
+    end
 
   def create
     @question = Question.new(question_params)
@@ -115,7 +116,5 @@ class QuestionsController < ApplicationController
     find_user
     @questions = Question.where(user_id: params[:user_id])
   end
-
-
 end
 

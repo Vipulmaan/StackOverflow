@@ -61,5 +61,4 @@ class FavoriteQuestionsController < ApplicationController
   def show_already_unfavorite_message
     redirect_to user_question_path(@question.user_id, params[:question_id]), notice: 'already unfavorite'
   end
-
 end

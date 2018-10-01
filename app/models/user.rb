@@ -44,6 +44,7 @@ class User < ApplicationRecord
 
 
   def match_password(login_password="")
+    #debugger
     encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
   end
 

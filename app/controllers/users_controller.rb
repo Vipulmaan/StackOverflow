@@ -1,9 +1,8 @@
   class UsersController < ApplicationController
 
 
-     before_action :save_login_state, :only => [:new, :create]
      before_action :find_user, :only => [:show,:edit,:destroy,:update]
-     before_action :authenticate_user, :except => [:new, :create]
+     before_action :authenticate_user, :only => [:show,:edit,:destroy,:update]
 
 
 
@@ -27,13 +26,12 @@
     end
 
     def create
+
       @user = User.new(user_params)
       if @user.password == @user.password_confirmation
         if @user.save
           flash[:notice] = 'Successful sign up ....'
           redirect_to(root_url)
-
-
 
         else
           flash[:notice] = 'Invalid entry....'
@@ -64,10 +62,9 @@
     @user= user.update(name: params[:user][:name], email: params[:user][:email])
     #debugger
       redirect_to user_path(params[:id])
+  end
 
     private
-
-
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
@@ -79,3 +76,4 @@
 
 
   end
+
