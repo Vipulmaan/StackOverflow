@@ -11,18 +11,19 @@ class ApplicationController < ActionController::Base
 
 
   def authenticate_user
+    @x = 1
     if session[:user_id]
       # set current user object to @current_user object variable
 
       #debugger
       @token = Session.find_by(Token: session[:user_id])
-      #debugger
+
       @current_user = User.find(@token.user_id)
       return true
 
     else
       redirect_to(:controller => 'sessions', :action => 'login')
-      false
+      return false
     end
   end
 
@@ -32,7 +33,7 @@ class ApplicationController < ActionController::Base
       redirect_to(:controller => 'sessions', :action => 'home')
       false
     else
-      return true
+      true
     end
   end
 

@@ -1,3 +1,5 @@
+<%= render "layouts/navbar" %>
+
 <%= form_for(users_path, method: :get) do %>
   Name <%= text_field_tag :data, params[:data] %>
   <%= hidden_field_tag :column, "name" %>

@@ -1,13 +1,9 @@
-<%= link_to "Logout", '/logout' %>  &nbsp
-&nbsp
 
-<%= link_to "Ask Question", new_user_question_path(current_user.id) %>  &nbsp
-&nbsp
-<%= link_to "profile", user_path(current_user.id) %>  &nbsp
-&nbsp
-<%= link_to "Add Tags", user_tags_path(current_user.id) %> &nbsp&nbsp
 
-<%= link_to "All Users ", users_path %>  &nbsp&nbsp
+
+<%= render "layouts/layoutWithAddTag" %>
+
+
 
 <%= form_for(all_questions_path, method: :get) do %>
   Title <%= text_field_tag :data, params[:data] %>
