@@ -9,13 +9,16 @@ class ApplicationController < ActionController::Base
 
 
   def authenticate_user
+    
     if session[:user_id]
+
       @token = Session.find_by!(Token: session[:user_id])
+
       @current_user = User.find(@token.user_id)
       true
     else
       redirect_to(:controller => 'sessions', :action => 'login')
-      false
+      return false
     end
   end
 
@@ -25,7 +28,7 @@ class ApplicationController < ActionController::Base
       redirect_to(:controller => 'sessions', :action => 'home')
       false
     else
-      return true
+      true
     end
   end
 

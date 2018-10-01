@@ -1,23 +1,57 @@
 
-<div>
+<head>
+  <style>
+    h1{
+      margin-bottom: 0px;
+    }
+    p{
+      margin-top: -10px;
+      color: #555555;
+    }
+    #star a{
+      font-size: 25px;
+      display: inline-block;
+      margin: 0    0      0       0;
+      display: inline;
+    }
+    #content a{
+      text-decoration: none;
+      display: inline-block;
+      margin: 0    0      0       0;
+      display: inline;
+    }
+    #votes a{
+      font-size: 25px;
+    }
+  </style>
+</head>
+
+<%= render "layouts/navbar" %>
+
+<div id="content">
 
   &nbsp
-  <h2> <%= @question.title %> </h2> <br>
+  <h1> <%= @question.title %> </h1> <br>
 
-  <h3> <%= @question.body %> </h3> <br><br>
+  <p> <%= @question.body %> </p> <br><br>
+  <span id="star">
+  <%if !@is_favorite %>
 
-  <%= link_to "favorite", {controller: 'favorite_questions', action: 'create', question_id: @question.id , user_id: @question.user_id}, method: :post %>
+    <%= link_to "☆", {controller: 'favorite_questions', action: 'create', question_id: @question.id , user_id: @question.user_id}, method: :post %>
+    &nbsp
+   <%else %>
+
+    <%= link_to "★", {controller: 'favorite_questions', action: 'destroy', question_id: @question.id , user_id: @question.user_id }, method: :delete %>
   &nbsp
-  &nbsp
-  <%= link_to "unfavorite", {controller: 'favorite_questions', action: 'destroy', question_id: @question.id , user_id: @question.user_id }, method: :delete %>
-  &nbsp
-  &nbsp
-  <%= link_to "upvote", user_question_votes_path(@user.id, @question.id, :upvote => "upvote", :type => "Question"), method: :post %>
-  &nbsp
-  &nbsp
-  <%= link_to "downvote", user_question_votes_path(@user.id, @question.id, :downvote => "downvote", :type => "Question"), method: :post %>
-  &nbsp
-  &nbsp
+
+    <%end %>
+  </span>
+  <span id="votes">
+    <%= link_to "⇧", user_question_votes_path(@user.id, @question.id, :upvote => "upvote", :type => "Question"), method: :post %>
+    &nbsp
+    <%= link_to "⇩", user_question_votes_path(@user.id, @question.id, :downvote => "downvote", :type => "Question"), method: :post %>
+    &nbsp
+  </span>
   &nbsp
   <%= link_to "total vote ", user_question_votes_path(@user.id, @question.id) %>
    &nbsp

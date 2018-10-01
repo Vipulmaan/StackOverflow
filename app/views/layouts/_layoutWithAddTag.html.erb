@@ -1,0 +1,41 @@
+<html>
+<head>
+  <style>
+    #elements a {
+      text-decoration: none;
+      color: #ffffff;
+    }
+    #elements{
+      background-color: #2E2F30;
+      padding: 10px;
+      margin-top: -25px;
+      margin-left: -8px;
+      width: 102%;
+      margin-bottom: 20px;
+    }
+    #logout{
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+<div id="elements">
+  <%= link_to "Ask Question", new_user_question_path(current_user.id) %>  &nbsp
+  &nbsp
+  <%= link_to "profile", user_path(current_user.id) %>  &nbsp
+  &nbsp
+  <%= link_to "All Users ", users_path %>  &nbsp&nbsp
+
+  <%= link_to "Add Tags", user_tags_path(current_user.id) %> &nbsp&nbsp
+
+  <div id="logout">
+    <%= link_to "Home", '/all_questions' %>  &nbsp&nbsp
+    <%= link_to "Logout", '/logout' %>  &nbsp
+    &nbsp
+  </div>
+  <% #debugger %>
+</div>
+
+</body>
+</html>

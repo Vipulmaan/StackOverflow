@@ -113,7 +113,5 @@ class QuestionsController < ApplicationController
     find_user
     @questions = Question.where(user_id: params[:user_id])
   end
-
-
 end
 
