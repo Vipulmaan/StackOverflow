@@ -1,6 +1,7 @@
   class UsersController < ApplicationController
 
 
+
      before_action :find_user, :only => [:show,:edit,:destroy,:update]
      before_action :authenticate_user, :only => [:show,:edit,:destroy,:update]
 
@@ -22,7 +23,7 @@
 
 
     def show
-       @vote=  User.total_votes(@user)
+      @vote = UserReputation.new.total_votes(@user)
     end
 
     def create
@@ -57,10 +58,7 @@
 
 
   def update
-    user=User.find(params[:id])
-    #debugger
-    @user= user.update(name: params[:user][:name], email: params[:user][:email])
-    #debugger
+    @user = @user.update_attributes!(name: params[:user][:name], email: params[:user][:email])
       redirect_to user_path(params[:id])
   end
 

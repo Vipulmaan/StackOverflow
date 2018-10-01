@@ -16,9 +16,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  def new
-
-  end
 
   def index
     find_route

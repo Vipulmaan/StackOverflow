@@ -1,12 +1,8 @@
-<h1>Tags </h1>
+`<h1>Tags </h1>
 
 <% @tags.each do |tag| %>
   <p>
     <%= tag.name %>  <br>
   </p>
-  <% if Question.find(tag.taggable_id).user_id == current_user.id %>
-    <%= link_to "destroy", user_question_tag_path(current_user.id, tag.taggable_id, tag.id), method: :delete, data: {confirmation: "are you sure?"} %>
-    <%= link_to "edit", edit_user_question_tag_path(current_user.id, tag.taggable_id, tag.id) %>
-  <% end %>
 <% end %>
 
