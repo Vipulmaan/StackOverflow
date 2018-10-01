@@ -17,11 +17,6 @@ class AnswersController < ApplicationController
     @answers = @question.answers
   end
 
-  def show
-      # Answer.correct_answer(params[:question_id], params[:id])
-      # flash.now[:notice] = "success"
-  end
-
   def edit
     render :partial => "answers/edit_answers"
   end
@@ -32,7 +27,6 @@ class AnswersController < ApplicationController
     else
       render :partial => "answers/edit_answers"
     end
-
   end
 
   def destroy

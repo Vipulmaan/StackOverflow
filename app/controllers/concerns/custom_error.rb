@@ -9,12 +9,5 @@ module Error
       @message = _message || 'Something went wrong'
     end
 
-    def fetch_json
-      {
-          error: _error,
-          status: _status,
-          message: _message
-      }
-    end
   end
 end

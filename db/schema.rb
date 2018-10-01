@@ -10,9 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_27_221720) do
 
-  create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+ActiveRecord::Schema.define(version: 2018_10_01_052016) do
+
+  create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+
     t.text "description"
     t.bigint "question_id"
     t.datetime "created_at", null: false
@@ -20,6 +22,13 @@ ActiveRecord::Schema.define(version: 2018_09_27_221720) do
     t.bigint "user_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
+  end
+
+  create_table "available_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_available_tags_on_name", unique: true
   end
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -39,9 +48,10 @@ ActiveRecord::Schema.define(version: 2018_09_27_221720) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.integer "valid_answer"
+    t.bigint "valid_answer_id"
     t.index ["title"], name: "index_questions_on_title"
     t.index ["user_id"], name: "index_questions_on_user_id"
+    t.index ["valid_answer_id"], name: "index_questions_on_valid_answer_id"
   end
 
   create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -59,10 +69,10 @@ ActiveRecord::Schema.define(version: 2018_09_27_221720) do
   create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "taggable_type"
     t.bigint "taggable_id"
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_tags_on_name"
+    t.bigint "available_tags_id"
+    t.index ["available_tags_id"], name: "index_tags_on_available_tags_id"
     t.index ["taggable_type", "taggable_id"], name: "index_tags_on_taggable_type_and_taggable_id"
   end
 
@@ -101,8 +111,13 @@ ActiveRecord::Schema.define(version: 2018_09_27_221720) do
     t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id"
   end
 
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
+  add_foreign_key "comments", "users"
+  add_foreign_key "questions", "answers", column: "valid_answer_id", on_delete: :nullify
   add_foreign_key "questions", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "tags", "available_tags", column: "available_tags_id"
   add_foreign_key "user_favorite_questions", "questions"
   add_foreign_key "user_favorite_questions", "users"
   add_foreign_key "votes", "users"
