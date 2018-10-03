@@ -11,8 +11,4 @@ class CreateSessions < ActiveRecord::Migration[5.2]
     end
   end
 
-  def self.create_token(id)
-
-  end
-
 end

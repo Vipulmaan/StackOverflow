@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
 
 
   def authenticate_user
-    @x = 1
     if session[:user_id]
       # set current user object to @current_user object variable
 

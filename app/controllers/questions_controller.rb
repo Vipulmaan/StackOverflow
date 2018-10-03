@@ -38,6 +38,7 @@ class QuestionsController < ApplicationController
     @tags = @question.tags
     @tag = Tag.new
     @is_favorite = User.find_by!(id: current_user.id).favorite_questions.where(question_id: @question.id).pluck(:favorite) == [true]
+
     end
 
   def create
