@@ -7,7 +7,6 @@
   include ApplicationHelper
 
 
-
   def authenticate_user
       @token = Session.find_by(Token: session[:user_id])
     if @token
@@ -15,10 +14,10 @@
       true
     else
       redirect_to(:controller => 'sessions', :action => 'login')
+
        false
     end
   end
-
 
   def save_login_state
     if session[:user_id]

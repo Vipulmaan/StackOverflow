@@ -2,7 +2,7 @@
 
 <%  if current_user.nil? %>
   <%= link_to "Sign-up", new_user_path %>
-  <%= link_to "Login", '/login', method: :post %>
+  <%= link_to "Login", '/login' %>
 <% else %>
   <%= link_to "Logout", '/logout' %>
   <%= link_to "Home", '/all_questions' %>
