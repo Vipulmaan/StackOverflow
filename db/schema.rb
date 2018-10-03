@@ -10,11 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 2018_10_02_100426) do
 
-ActiveRecord::Schema.define(version: 2018_10_01_052016) do
-
-  create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-
+  create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "description"
     t.bigint "question_id"
     t.datetime "created_at", null: false
@@ -69,10 +67,13 @@ ActiveRecord::Schema.define(version: 2018_10_01_052016) do
   create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "taggable_type"
     t.bigint "taggable_id"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "available_tags_id"
     t.index ["available_tags_id"], name: "index_tags_on_available_tags_id"
+    t.index ["name"], name: "index_tags_on_name"
+    t.index ["taggable_type", "taggable_id", "available_tags_id"], name: "by_unique_tags", unique: true
     t.index ["taggable_type", "taggable_id"], name: "index_tags_on_taggable_type_and_taggable_id"
   end
 
@@ -106,7 +107,7 @@ ActiveRecord::Schema.define(version: 2018_10_01_052016) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "vote"
-    t.index ["user_id", "votable_id"], name: "index_votes_on_user_id_and_votable_id", unique: true
+    t.index ["user_id", "votable_id", "votable_type"], name: "index_votes_on_user_id_and_votable_id_and_votable_type", unique: true
     t.index ["user_id"], name: "index_votes_on_user_id"
     t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id"
   end

@@ -1,11 +1,11 @@
 class QuestionsController < ApplicationController
-
+  
 
   before_action :authenticate_user
   before_action :find_user , except: [:index,:new,:create]
   before_action :find_question, only: [:valid_answer, :show, :edit, :update, :destroy]
   before_action :update_question , only: [ :valid_answer, :edit, :update, :destroy]
-
+  
 
   def new
     @question = Question.new(user_id: current_user.id)
@@ -39,7 +39,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
-    if @question.save!
+    if @question.save
       redirect_to user_question_path(@question.user_id, @question.id)
     else
       render 'new'
@@ -84,8 +84,10 @@ class QuestionsController < ApplicationController
 
 
   def call_search_sevice
-    search_service = SearchService.new({class: Question, column: params[:column], data: params[:data]})
+
+    search_service = SearchService.new({class: Question, column: "title", data: params[:data]})
     @questions= search_service.search
+
   end
 
   def find_question
@@ -113,5 +115,8 @@ class QuestionsController < ApplicationController
     find_user
     @questions = Question.where(user_id: params[:user_id])
   end
+
+  
+
 end
 

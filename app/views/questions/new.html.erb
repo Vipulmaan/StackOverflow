@@ -11,4 +11,11 @@
       <%= f.submit "post question", class: "btn btn-primary" %>
     <% end %>
   </div>
+<br><br><br>
+   <% if @question.errors.any? %>
+      <% for message_error in @question.errors.full_messages %>
+        <li> <%= message_error %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>

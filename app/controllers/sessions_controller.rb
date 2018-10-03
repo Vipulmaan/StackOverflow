@@ -28,16 +28,10 @@ class SessionsController < ApplicationController
 
   def logout
 
-    # session.delete(:user_id)
-    # @current_user = nil
-    # render plain: session.keys
-    # return nil
-    # debugger
     id = session[:user_id]
-    debugger
     Session.find_by!(token: id).destroy
-    # session[:user_id] = nil
     redirect_to(root_url)
+    
   end
 
   def home

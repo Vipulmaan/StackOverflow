@@ -1,8 +1,8 @@
 class TagsController < ApplicationController
 
   before_action :authenticate_user
-  before_action :parent
-  before_action :find_tag, only: [:edit, :update, :destory]
+  before_action :parent ,except: [:show]
+  before_action :find_tag, only: [:destory]
 
 
   def index
@@ -13,27 +13,19 @@ class TagsController < ApplicationController
     @tag = AvailableTag.new
   end
 
+  def show
+  
+    tag= AvailableTag.find_by!(name: params[:name])
+    questions_id=Tag.where(taggable_type: "Question" , available_tags_id: tag.id).pluck(:taggable_id)
+    @questions=Question.where(id: questions_id)
+  end
+
+
   def create
     tag_service_call.create_tag(params[:available_tag][:name])
     find_route
   end
 
-
-  def edit
-
-    if params[:question_id]
-      @question = Question.find(params[:question_id])
-      render :partial => "tags/update_tag"
-    else
-      @user = User.find_by!(id: params[:user_id])
-    end
-    
-  end
-
-  def update
-    tag_service_call.update_tag(params[:available_tag][:name])
-    find_route
-  end
 
   def destroy
 

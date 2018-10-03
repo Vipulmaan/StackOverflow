@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get "/login", :to => "sessions#login"
   get "/home", :to => "sessions#home"
   get "/setting", :to => "sessions#setting"
+  get '/:name/questions' , :to => "tags#show" , :as => "tag_questions"
+  get  'all_tags' , :to => "available_tags#index" 
 
   get "/users/:user_id/questions/:id/answers/:answer_id/valid_answer" , :to => "questions#valid_answer" ,:as => "valid_answer"
   # get '/404', to: 'errors#not_found'

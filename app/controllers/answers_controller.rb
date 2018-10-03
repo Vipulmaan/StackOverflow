@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
 
   def create
     @answer = @question.answers.new(answer_params)
-    @answer.save!
+     @answer.save
     redirect_to user_question_path(@question.user_id, @question.id)
   end
 
