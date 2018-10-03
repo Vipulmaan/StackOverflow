@@ -3,23 +3,19 @@ class ApplicationController < ActionController::Base
   # rescue_from UsersController::Forbidden, :with => :render_403
 
   include Error::ErrorHandler
- #  include Concerns::Errors
- #  include Concerns::ErrorHandlers
 
   include ApplicationHelper
 
 
 
   def authenticate_user
-    if session[:user_id]
-      # set current user object to @current_user object variable
 
-      #debugger
-      @token = Session.find_by(Token: session[:user_id])
+    if session[:user_id]
+
+      @token = Session.find_by!(Token: session[:user_id])
 
       @current_user = User.find(@token.user_id)
-      return true
-
+      true
     else
       redirect_to(:controller => 'sessions', :action => 'login')
       return false

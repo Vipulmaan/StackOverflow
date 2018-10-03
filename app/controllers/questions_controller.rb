@@ -15,31 +15,28 @@ class QuestionsController < ApplicationController
   def index
 
     if params[:favorite_question]
-
        favorite_questions
-
     elsif params[:user_id]
        user_specific_questions
      @question = Question.new
     elsif params[:data]
       call_search_sevice
     else
-     @questions  =   Question.all_questions_sort_by_vote
+      @questions = QuestionService.new.all_questions_sort_by_vote
     end
 
   end
-
 
   def show
     @answers = @question.answers
     @answer = Answer.new(:user_id => current_user.id, :question_id => @question.id)
     @comments = @question.comments
     @comment = @question.comments.new("user_id" => current_user.id)
-    @tags = @question.tags
-    @tag = Tag.new
     @is_favorite = User.find_by!(id: current_user.id).favorite_questions.where(question_id: @question.id).pluck(:favorite) == [true]
-
-    end
+    @available_tags_id = @question.tags
+    @tags=AvailableTag.where(id: @available_tags_id)
+    @tag = AvailableTag.new
+  end
 
   def create
     @question = Question.new(question_params)
@@ -73,7 +70,7 @@ class QuestionsController < ApplicationController
 
 
   def valid_answer
-    @question.update_attributes!(valid_answer: params[:answer_id].to_i)
+    @question.update_attributes!(valid_answer_id: params[:answer_id].to_i)
     redirect_to user_question_path(@question.user_id, @question.id) , notice: "successfully update"
   end
 

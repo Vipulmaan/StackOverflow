@@ -76,7 +76,7 @@ class VoteService
   private
 
   def user_exist?
-    if Vote.exists?(user_id: @user_id, votable_id: @votable_id)
+    if Vote.exists?(user_id: @user_id, votable_id: @votable_id, votable_type: @type)
       return true
     else
       return false
