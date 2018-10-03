@@ -11,5 +11,4 @@ class CreateSessions < ActiveRecord::Migration[5.2]
     end
   end
 
-
 end

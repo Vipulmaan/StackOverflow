@@ -9,7 +9,7 @@
 
 
   def authenticate_user
-    
+
     if session[:user_id]
 
       @token = Session.find_by!(Token: session[:user_id])
