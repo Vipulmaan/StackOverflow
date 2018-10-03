@@ -21,14 +21,20 @@ class SessionsController < ApplicationController
       flash[:notice] = "Wow Welcome again, you logged in as #{authorized_user.name}"
       redirect_to '/all_questions'
     else
-      flash.now[:notice] = "Username or password is incorrect...."
       render "login"
     end
   end
 
   def logout
 
+
+    # session.delete(:user_id)
+    # @current_user = nil
+    # render plain: session.keys
+    # return nil
+    # debuggersc
     id = session[:user_id]
+    #debugger
     Session.find_by!(token: id).destroy
     redirect_to(root_url)
     
