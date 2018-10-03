@@ -9,11 +9,7 @@ class CommentsController < ApplicationController
 
   def edit
     @question=find_question
-    unless params[:answer_id]
-      render :partial => "comments/edit_comment_question"
-    else
-      render :partial => "comments/edit_comment_for_answer"
-    end
+     find_route_for_edit
   end
 
 
@@ -28,15 +24,19 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @parent.comments.new(comment_params)
-    @comment.save!
+    if @comment.save
     find_route
-
+   else
+     
+   end
   end
 
   def update
-    @comment.update_attributes!(comment_params)
+   if @comment.update_attributes(comment_params)
    find_route
-
+  else
+   find_route_for_edit 
+   end
   end
 
   def destroy
@@ -81,6 +81,14 @@ class CommentsController < ApplicationController
   def update_comment
     if @comment.user_id != current_user.id
       raise Error::CustomError.new(message: "You can not do any change in this comment")
+    end
+  end
+
+  def find_route_for_edit
+    unless params[:answer_id]
+      render :partial => "comments/edit_comment_question"
+    else
+      render :partial => "comments/edit_comment_for_answer"
     end
   end
 
