@@ -9,16 +9,13 @@
 
 
   def authenticate_user
-    
-    if session[:user_id]
-
-      @token = Session.find_by!(Token: session[:user_id])
-
+      @token = Session.find_by(Token: session[:user_id])
+    if @token
       @current_user = User.find(@token.user_id)
       true
     else
       redirect_to(:controller => 'sessions', :action => 'login')
-      return false
+       false
     end
   end
 

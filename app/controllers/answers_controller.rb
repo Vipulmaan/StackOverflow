@@ -11,7 +11,7 @@ class AnswersController < ApplicationController
    if  @answer.save
     redirect_to user_question_path(@question.user_id, @question.id)
   else
-      flash.notice = @answer.errors
+      flash.notice = @answer.errors.full_messages
       redirect_to(request.referrer) 
   end
 

@@ -27,7 +27,8 @@ class CommentsController < ApplicationController
     if @comment.save
     find_route
    else
-     
+     flash[:notice] = @comment.errors.full_messages
+      redirect_to(request.referrer)  
    end
   end
 
