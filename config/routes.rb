@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'sessions/home'
   get 'sessions/profile'
   root 'sessions#index'
-  post'/login' , to:  "sessions#create"
+  post '/create' , to: "sessions#create" , :as => "session_create"
   get "/logout", to: "sessions#logout"
   post "/favorite", to: "favorite_questions#create"
   delete "/unfavorite", to: "favorite_questions#destroy"

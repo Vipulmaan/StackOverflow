@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2018_10_02_100426) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.integer "valid_answer"
     t.bigint "valid_answer_id"
     t.index ["title"], name: "index_questions_on_title"
     t.index ["user_id"], name: "index_questions_on_user_id"
@@ -107,14 +108,11 @@ ActiveRecord::Schema.define(version: 2018_10_02_100426) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "vote"
-    t.index ["user_id", "votable_id", "votable_type"], name: "index_votes_on_user_id_and_votable_id_and_votable_type", unique: true
+    t.index ["user_id", "votable_id"], name: "index_votes_on_user_id_and_votable_id", unique: true
     t.index ["user_id"], name: "index_votes_on_user_id"
     t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id"
   end
 
-  add_foreign_key "answers", "questions"
-  add_foreign_key "answers", "users"
-  add_foreign_key "comments", "users"
   add_foreign_key "questions", "answers", column: "valid_answer_id", on_delete: :nullify
   add_foreign_key "questions", "users"
   add_foreign_key "sessions", "users"

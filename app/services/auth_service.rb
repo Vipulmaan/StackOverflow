@@ -18,6 +18,7 @@ class AuthService
     if user && match_password(user, login_password)
       user
     else
+      # user.errors.messages[:name] << "Incorrect username or password"
       false
     end
   end
