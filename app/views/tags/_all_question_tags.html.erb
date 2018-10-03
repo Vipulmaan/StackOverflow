@@ -2,7 +2,7 @@
 
 <% @tags.each do |tag| %>
   <p>
-    <%= tag.name %>  <br>
+    <%= link_to tag.name , tag_questions_path(tag.name) %>  <br>
   </p>
 <% end %>
 

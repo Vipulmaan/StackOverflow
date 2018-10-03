@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :votes, dependent: :destroy
   attr_accessor :username, :password, :password_confirmation
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\Z/i
-  validates :name, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
+  validates :name, :presence => true, :uniqueness => true 
   validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
   validates :password, :presence => true, :length => { :in => 6..20 }, :on => :create
   validates :password, :presence => true, :length => { :in => 6..20 }, :on => :update, if: -> { password.present? }

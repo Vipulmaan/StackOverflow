@@ -6,3 +6,10 @@
   <%= f.submit "update my comment for answer ", class: "btn btn-primary" %>
 
 <% end %>
+
+<% if @comment.errors.any? %>
+      <% for message_error in @comment.errors.full_messages %>
+        <li> <%= message_error %></li>
+      <% end %>
+    </ul>
+  <% end %>

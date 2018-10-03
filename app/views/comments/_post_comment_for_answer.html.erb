@@ -5,3 +5,10 @@
   <%= f.text_field :description, class: 'form-control' %>
   <%= f.submit "post my comment for answer ", class: "btn btn-primary" %>
 <% end %>
+
+<% if @answer_comment_new.errors.any? %>
+      <% for message_error in @answer_comment_new.errors.full_messages %>
+        <li> <%= message_error %></li>
+      <% end %>
+    </ul>
+  <% end %>
