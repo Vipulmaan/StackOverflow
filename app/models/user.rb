@@ -25,7 +25,6 @@ class User < ApplicationRecord
     end
   end
 
-
   def clear_password
     self.password = nil
   end
