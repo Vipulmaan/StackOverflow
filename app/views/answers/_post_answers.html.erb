@@ -5,4 +5,11 @@
   <%= f.submit "post my answer", class: "btn btn-primary" %>
 <% end %>
 
+<% if @answer.errors.any? %>
+      <% for message_error in @answer.errors.full_messages %>
+        <li> <%= message_error %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
 

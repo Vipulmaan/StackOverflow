@@ -1,9 +1,8 @@
   class UsersController < ApplicationController
 
 
-
      before_action :find_user, :only => [:show,:edit,:destroy,:update]
-     before_action :authenticate_user, :only => [:show,:edit,:destroy,:update]
+     before_action :authenticate_user, :only => [:index,:show,:edit,:destroy,:update]
 
 
 
@@ -13,7 +12,7 @@
 
     def index
       if params[:data]
-        search_service = SearchService.new({class: User, column: params[:column], data: params[:data]})
+        search_service = SearchService.new({class: User, column: "name", data: params[:data]})
         @users = search_service.search
       else
         @users = User.all
@@ -33,7 +32,6 @@
         if @user.save
           flash[:notice] = 'Successful sign up ....'
           redirect_to(root_url)
-
         else
           flash[:notice] = 'Invalid entry....'
           render 'new'
