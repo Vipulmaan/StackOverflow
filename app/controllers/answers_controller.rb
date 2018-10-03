@@ -8,8 +8,13 @@ class AnswersController < ApplicationController
 
   def create
     @answer = @question.answers.new(answer_params)
-     @answer.save
+   if  @answer.save
     redirect_to user_question_path(@question.user_id, @question.id)
+  else
+      flash.notice = @answer.errors.full_messages
+      redirect_to(request.referrer) 
+  end
+
   end
 
 
@@ -22,7 +27,7 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if @answer.update_attributes!(answer_params)
+    if @answer.update_attributes(answer_params)
       redirect_to user_question_path(params[:user_id], @answer.question_id)
     else
       render :partial => "answers/edit_answers"

@@ -50,6 +50,7 @@ class VotesController < ApplicationController
       vote_service_call.upvote
       flash.notice = "successfully upvote"
     end
+    redirect_to(request.referrer)
   end
 
   def downvote
@@ -59,6 +60,7 @@ class VotesController < ApplicationController
       vote_service_call.downvote
       flash.notice = "successfully downvote"
     end
+    redirect_to(request.referrer)
   end
 
 
